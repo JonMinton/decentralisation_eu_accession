@@ -16,114 +16,72 @@ pacman::p_load(
 )
 
 
+dta <- read_csv("data/derived/simplified_both.csv")
 
-# Tidy 2001 data  ---------------------------------------------------------
-
-dta_01 <- read_csv("data/2001_census/cob_2001_sex.csv")
-
-value_codes <- read_excel("data/2001_census/value_code_labels.xlsx")
-eu_groupings <- read_excel("data/eu_countries_consistent_categories.xlsx",sheet = "c_2001", na = "NA")
-geo_lookup <- read_csv("data/2001_geographical_lookup/OA01_LSOA01_MSOA01_EW_LU.csv")
-
-
-
-value_codes %>% mutate(
-  code = value + 150000,
-  code = paste0("cs0", as.character(code))
-) -> value_codes
-
-dta_01 %>% 
-  gather("code", "count", -`Zone Code`) %>% 
-  left_join(value_codes) %>% 
-  rename(OA01CD = `Zone Code`) %>% 
-  left_join(geo_lookup) %>% 
-  select(lsoa = LSOA01CD, geography, sex, count) %>% 
-  group_by(lsoa, geography, sex) %>% 
-  summarise(count = sum(count)) %>% 
-  ungroup() %>%   # .$geography %>% unique %>% write.csv(file = "clipboard", .)
-  left_join(eu_groupings) %>% 
-  filter(sex == "total") %>% 
-  filter(!is.na(geography_short)) %>% 
-  group_by(lsoa, geography_short) %>% 
-  summarise(count = sum(count)) %>% 
-  mutate(year = 2001) %>% 
-  select(lsoa, year, geography_short, count) -> simplified_2001
+# 
+# shp_eng <- read_shape(file = "shapefiles/England_low_soa_2001/england_low_soa_2001.shp")
+# 
+# dta  %>% filter(year == 2001, geography_short == "UK")  -> tmp
+# 
+# tmp %>% append_data(data = ., shp = shp_eng, key.shp = "zonecode", key.data = "lsoa") -> 
+#   shp_eng_2001
+# 
+# shp_eng_2001 %>% 
+#   tm_shape(.) + tm_fill(col = "proportion")
+# 
 
 
-write_csv(simplified_2001, "data/derived/simplified_2001.csv")
+# LSOAs seem too highly detailed. Looking to move to MSOAs instead
 
-rm(list = ls())
-gc()
+# I already have LSOAs to MSOA lookup for 2001
 
-# Tidy 2011 data  ---------------------------------------------------------
-
-dta_2011 <- read_csv("data/2011_census/201672713242535_AGE_COB_ECOACT_UNIT/Data_AGE_COB_ECOACT_UNIT.csv")
-#meta_2011 <- read_csv("data/2011_census/201672713242535_AGE_COB_ECOACT_UNIT/Meta_AGE_COB_ECOACT_UNIT.csv")
-
-eu_groupings <- read_excel("data/eu_countries_consistent_categories.xlsx",sheet = "c_2011", na = "NA")
-
-ln_1 <- dta_2011 %>%  
-  .[1,]  %>% 
-  map_chr( ~.[[1]]) # convert to character vector
-
-
-nms <- names(dta_2011)
-nms2 <- ifelse(is.na(ln_1), nms, ln_1)
-names(dta_2011) <- nms2
-
-rm(nms, nms2, ln_1)
-dta_2011 %>% 
-  slice(-1) %>% 
-  gather(key = "category", value = "count", -c(1:5)) %>% 
-  filter(!is.na(count)) %>% 
-  select(lsoa = GEO_CODE, category, count) %>% 
-  separate(category, into = c("age", "country", "economic_activity", "unit"), sep = "-") %>% 
-  filter(str_detect(age, "16 and")) %>%  # For 'Age : Age 16 and over'
-  select(lsoa, country, count) %>% 
-  mutate(country = str_replace(country, pattern = "Country of birth : ", replacement = "")) %>% 
-  mutate(country = str_trim(country)) %>% 
-  left_join(eu_groupings) %>% 
-  select(lsoa, country_short, count) %>% 
-  mutate(count = as.numeric(count)) %>%  
-  group_by(lsoa, country_short) %>%
-  summarise(count = sum(count)) %>% 
-  filter(!is.na(country_short)) %>% 
-  rename(geography_short = country_short) %>% 
-  mutate(year = 2011) %>% 
-  select(lsoa, year, geography_short, count) -> simplified_2011
-
-write_csv(simplified_2011, path = "data/derived/simplified_2011.csv")
-
-
-rm(list = ls())
-gc()
-
-
-
-# Join the two tables -----------------------------------------------------
-
-d_01 <- read_csv("data/derived/simplified_2001.csv")
-d_11 <- read_csv("data/derived/simplified_2011.csv")
-
-d_both <- bind_rows(d_01, d_11)
-
-d_both %>% 
-  group_by(lsoa, year) %>% 
-  mutate(proportion = count / sum(count)) %>% 
-  ungroup() -> d_both
-
-write_csv(d_both, "data/derived/simplified_both.csv")
-
-
-
-
-
+lookup <- read_csv("data/2001_geographical_lookup/OA01_LSOA01_MSOA01_EW_LU.csv")
          
+lookup %>% 
+  select(lsoa = LSOA01CD, msoa = MSOA01CD) %>% 
+  distinct() -> simple_lookup
+
+
+dta %>% 
+  left_join(simple_lookup) %>% 
+  select(msoa, year, geography_short, count) %>% 
+  group_by(msoa, year, geography_short) %>% 
+  summarise(count = sum(count)) %>% 
+  ungroup() %>% 
+  group_by(msoa, year) %>% 
+  mutate(proportion = count / sum(count)) -> dta_msoa
+
+ 
+# 
+
+shp_msoa <- read_shape(file = "shapefiles/Middle_layer_super_output_areas_(E+W)_2001_Boundaries_(Full_Extent)_V2/MSOA_2001_EW_BFE_V2.shp")
+
+# # Create cartogram
+# dta_msoa  %>% 
+#   filter(year == 2001)  %>% 
+#   select(msoa, count)  %>% 
+#   group_by(msoa)  %>% 
+#   summarise(count = sum(count))  %>% 
+#   ungroup() -> pop_2001
+# 
+# append_data(shp = shp_msoa, data = pop_2001, key.shp = "MSOA01CD", key.data = "msoa") -> shp_msoa_count
+# 
+# shp_msoa_count[!is.na(shp_msoa_count$msoa),] -> shp_msoa_count
+# 
+# write_shape(shp = shp_msoa_count, file = "shapefiles/msoa_2001_pops/shp_2001_pop.shp")
+
+
+# Append proportion UK born in different places 
+
+dta_msoa %>% 
+  filter(year == 2001, geography_short == "UK") %>% 
+  ungroup() %>% 
+  select(msoa, proportion) -> tmp 
+
+append_data(shp = shp_msoa, data = tmp, key.shp = "MSOA01CD", key.data = "msoa") %>% 
+  tm_shape(.) + 
+  tm_polygons("proportion", border.col = NULL)
 
 
 
 
-
-
-
-         
