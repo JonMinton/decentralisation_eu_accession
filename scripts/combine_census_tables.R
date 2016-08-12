@@ -105,6 +105,28 @@ gc()
 d_01 <- read_csv("data/derived/simplified_2001.csv")
 d_11 <- read_csv("data/derived/simplified_2011.csv")
 
+# Look at levels of non-agreement 
+d_both   %>% 
+  group_by(lsoa, year)  %>% 
+  summarise(count = sum(count))  %>% 
+  ungroup()  %>% 
+  mutate(year = paste0("y_", year))  %>% 
+  spread(year, count)  %>% 
+  mutate(y1_mis = is.na(y_2001), y2_mis = is.na(y_2011))  %>% 
+  group_by(y1_mis, y2_mis)  %>% 
+  tally()  %>%  
+  ungroup()  %>% 
+  mutate(prop = n / sum(n))
+
+# y1_mis y2_mis     n       prop
+# (lgl)  (lgl) (int)      (dbl)
+# 1  FALSE  FALSE 31672 0.89058853
+# 2  FALSE   TRUE   810 0.02277648
+# 3   TRUE  FALSE  3081 0.08663499
+
+# So about 1/10th of records don't link
+
+
 d_both <- bind_rows(d_01, d_11)
 
 d_both %>% 
