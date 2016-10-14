@@ -63,9 +63,9 @@ lookup <- read_csv("data/2001_geographical_lookup/OA01_LSOA01_MSOA01_EW_LU.csv")
 ttwa_lookup <- read_csv("data/LSOA01_TTWA01_UK_LU.csv")
 
 ttwa_lookup %>% 
-  select(LSOA01CD, TTWA01CD, TTWA01NM) %>% 
+  dplyr::select(LSOA01CD, TTWA01CD, TTWA01NM) %>% 
   inner_join(lookup) %>% 
-  select(lsoa = LSOA01CD, msoa = MSOA01CD, ttwa = TTWA01CD, ttwa_name = TTWA01NM) -> ttwa_msoa_lookup
+  dplyr::select(lsoa = LSOA01CD, msoa = MSOA01CD, ttwa = TTWA01CD, ttwa_name = TTWA01NM) -> ttwa_msoa_lookup
 
 dta %>% 
   left_join(ttwa_msoa_lookup) %>% 
@@ -108,6 +108,69 @@ shp_lsoa <- read_shape(file = "shapefiles/England_low_soa_2001/england_low_soa_2
 # write_shape(shp = shp_msoa_count, file = "shapefiles/msoa_2001_pops/shp_2001_pop.shp")
 
 
+
+# Automate process 
+# For each TTWA 
+
+# Proportion UK born 
+# Proportion Old EU born
+# Proportion New EU Born
+#   - in 2001 and 2011 
+create_ttwa_shp <- function(dta, shp) {
+  dta %>% 
+    append_data(shp = shp, data = ., key.shp = "MSOA01CD", key.data = "msoa", ignore.na = T) %>% 
+    .[!is.na(.$ttwa),] -> out
+  out
+}
+
+create_ttwa_tmap <- function(shp, title){
+   tm_shape(shp) + 
+    tm_fill("proportion", palette = "Paired", style = "quantile", n = 10) + 
+    tm_legend(legend.outside = T, legend.outside.position = "right") -> tm
+  
+  save_tmap(tm, filename = paste0("tmaps/proportions/",title, ".png"), width = 20, height = 20, units = "cm", dpi = 300)
+  NULL
+}
+
+dta_msoa_ttwa %>% 
+  filter(!is.na(year), !is.na(ttwa_name)) %>% 
+  group_by(ttwa_name, year, geography_short) %>% 
+  nest() %>% 
+  mutate(ttwa_shp = map(data, create_ttwa_shp, shp = shp_msoa)) %>% 
+  mutate(title_name = paste0(ttwa_name, "_" , year, "_" , geography_short)) %>%  
+  mutate(tmp = walk2(ttwa_shp, title_name, create_ttwa_tmap))
+
+
+create_change_ttwa_tmap <- function(shp, title){
+  tm_shape(shp) + 
+    tm_fill("change", palette = "Paired", style = "quantile", n = 10) + 
+    tm_legend(legend.outside = T, legend.outside.position = "right") -> tm
+  
+  save_tmap(tm, filename = paste0("tmaps/change_over_censuses/",title, ".png"), width = 20, height = 20, units = "cm", dpi = 300)
+  NULL
+}
+
+debug(create_change_ttwa_tmap)
+dta_msoa_ttwa %>% 
+  filter(!is.na(year), !is.na(ttwa_name)) %>% 
+  dplyr::select(ttwa, ttwa_name, msoa, year, geography_short, proportion) %>% 
+  spread(year, proportion) %>%
+  mutate(change = `2011` - `2001`) %>% 
+  filter(!is.na(change)) %>% 
+  dplyr::select(-`2001`, -`2011`) %>% 
+  ungroup() %>% 
+  group_by(ttwa_name, geography_short) %>% 
+  nest() %>% 
+  mutate(title_name = paste0(ttwa_name, "_", geography_short)) %>% 
+  mutate(ttwa_shp = map(data, create_ttwa_shp, shp = shp_msoa)) -> tmp
+
+tmp %>% 
+  mutate(tmp = walk2(ttwa_shp, title_name, create_change_ttwa_tmap))
+
+ 
+
+
+
 # Append proportion UK born in different places 
 
 # Do just for Sheffield, MSOA
@@ -119,7 +182,56 @@ dta_msoa_ttwa %>%
   append_data(shp = shp_msoa, data = ., key.shp = "MSOA01CD", key.data = "msoa", ignore.na =T) %>%  
   .[!is.na(.$ttwa),]  %>% 
   tm_shape(.) + 
-  tm_fill("proportion")
+  tm_fill("proportion", title = "Proportion UK Born, 2011")
+
+dta_msoa_ttwa %>% 
+  filter(year == 2001) %>% 
+  filter(geography_short == "UK") %>% 
+  filter(ttwa_name == "Sheffield and Rotherham") %>% 
+  append_data(shp = shp_msoa, data = ., key.shp = "MSOA01CD", key.data = "msoa", ignore.na =T) %>%  
+  .[!is.na(.$ttwa),]  %>% 
+  tm_shape(.) + 
+  tm_fill("proportion", title = "Proportion UK Born, 2001")
+
+dta_msoa_ttwa %>% 
+  filter(year == 2001) %>% 
+  filter(geography_short == "Europe - Old EU or Western Europe") %>% 
+  filter(ttwa_name == "Sheffield and Rotherham") %>% 
+  append_data(shp = shp_msoa, data = ., key.shp = "MSOA01CD", key.data = "msoa", ignore.na =T) %>%  
+  .[!is.na(.$ttwa),]  %>% 
+  tm_shape(.) + 
+  tm_fill("proportion", title = "Old EU, 2001", palette = "Paired", breaks = seq(0, 0.25, by = 0.0125)) + 
+  tm_legend(legend.outside = T, legend.outside.position = "right")
+
+dta_msoa_ttwa %>% 
+  filter(year == 2011) %>% 
+  filter(geography_short == "Europe - Old EU or Western Europe") %>% 
+  filter(ttwa_name == "Sheffield and Rotherham") %>% 
+  append_data(shp = shp_msoa, data = ., key.shp = "MSOA01CD", key.data = "msoa", ignore.na =T) %>%  
+  .[!is.na(.$ttwa),]  %>% 
+  tm_shape(.) + 
+  tm_fill("proportion", title = "Old EU, 2011", palette = "Paired", breaks = seq(0, 0.25, by = 0.0125))
+
+
+dta_msoa_ttwa %>% 
+  filter(year == 2001) %>% 
+  filter(geography_short == "Europe - Not Old EU") %>% 
+  filter(ttwa_name == "Sheffield and Rotherham") %>% 
+  append_data(shp = shp_msoa, data = ., key.shp = "MSOA01CD", key.data = "msoa", ignore.na =T) %>%  
+  .[!is.na(.$ttwa),]  %>% 
+  tm_shape(.) + 
+  tm_fill("proportion", title = "Accession States? 2001", palette = "Paired", breaks = seq(0, 0.0125, by = 0.00125)) + 
+  tm_legend()
+
+dta_msoa_ttwa %>% 
+  filter(year == 2011) %>% 
+  filter(geography_short == "Europe - Not Old EU") %>% 
+  filter(ttwa_name == "Sheffield and Rotherham") %>% 
+  append_data(shp = shp_msoa, data = ., key.shp = "MSOA01CD", key.data = "msoa", ignore.na =T) %>%  
+  .[!is.na(.$ttwa),]  %>% 
+  tm_shape(.) + 
+  tm_fill("proportion", title = "Accession States, 2011", palette = "Paired", breaks = seq(0, 0.00625, by = 0.0125))
+
 
 # Do just for Sheffield, LSOA
 
