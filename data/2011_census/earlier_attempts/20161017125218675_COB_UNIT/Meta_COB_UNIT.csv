@@ -1,0 +1,385 @@
+CDU_FIELD_NAME,CENSUS_CELLNAME,TOPIC,CATEGORY,TOPIC_DESCRIPTION,
+F1002,QS213EW0001,Unit,Persons,The unit is for a particular count (e.g. people or households),
+F1002,QS213EW0001,Country of birth,Total\ Country of birth,"Country of birth is the country in which a person was born. The country of birth question included six tick-box responses: one for each of the four parts of the UK (England, Wales, Scotland and Northern Ireland); one for the Republic of Ireland; and one for 'Elsewhere'. 
+<br/>
+Where a person ticked 'Elsewhere', they were asked to write in the current name of the country in which they were born. Responses are assigned codes based on the <a href="http://www.ons.gov.uk/ons/guide-method/classifications/current-standard-classifications/national-statistics-country-classification/index.html" target="_blank">National Statistics Country Classification</a>.
+<br/>
+The grouping of countries within the classification is broadly regional, but takes into account the grouping of European Union (EU) countries. Countries in the EU are grouped into those that were EU members in March 2001, and those that became members (accession countries) between April 2001 and March 2011 as part of the EU enlargement process. 
+<br/>
+When a person's written response to the country of birth question was a former country name, and the country that it relates to no longer exists and is not wholly contained within the geographic boundary of a current country, the response was coded to one of the additional categories contained in the 'Former country' grouping. For example, 'Czechoslovakia' was coded to 'Czechoslovakia (not otherwise specified)'.",
+F1004,QS213EW0003,Country of birth,Europe\ United Kingdom,"Country of birth is the country in which a person was born. The country of birth question included six tick-box responses: one for each of the four parts of the UK (England, Wales, Scotland and Northern Ireland); one for the Republic of Ireland; and one for 'Elsewhere'. 
+<br/>
+Where a person ticked 'Elsewhere', they were asked to write in the current name of the country in which they were born. Responses are assigned codes based on the <a href="http://www.ons.gov.uk/ons/guide-method/classifications/current-standard-classifications/national-statistics-country-classification/index.html" target="_blank">National Statistics Country Classification</a>.
+<br/>
+The grouping of countries within the classification is broadly regional, but takes into account the grouping of European Union (EU) countries. Countries in the EU are grouped into those that were EU members in March 2001, and those that became members (accession countries) between April 2001 and March 2011 as part of the EU enlargement process. 
+<br/>
+When a person's written response to the country of birth question was a former country name, and the country that it relates to no longer exists and is not wholly contained within the geographic boundary of a current country, the response was coded to one of the additional categories contained in the 'Former country' grouping. For example, 'Czechoslovakia' was coded to 'Czechoslovakia (not otherwise specified)'.",
+F1004,QS213EW0003,Unit,Persons,The unit is for a particular count (e.g. people or households),
+F1010,QS213EW0014,Unit,Persons,The unit is for a particular count (e.g. people or households),
+F1010,QS213EW0014,Country of birth,Europe\ Ireland,"Country of birth is the country in which a person was born. The country of birth question included six tick-box responses: one for each of the four parts of the UK (England, Wales, Scotland and Northern Ireland); one for the Republic of Ireland; and one for 'Elsewhere'. 
+<br/>
+Where a person ticked 'Elsewhere', they were asked to write in the current name of the country in which they were born. Responses are assigned codes based on the <a href="http://www.ons.gov.uk/ons/guide-method/classifications/current-standard-classifications/national-statistics-country-classification/index.html" target="_blank">National Statistics Country Classification</a>.
+<br/>
+The grouping of countries within the classification is broadly regional, but takes into account the grouping of European Union (EU) countries. Countries in the EU are grouped into those that were EU members in March 2001, and those that became members (accession countries) between April 2001 and March 2011 as part of the EU enlargement process. 
+<br/>
+When a person's written response to the country of birth question was a former country name, and the country that it relates to no longer exists and is not wholly contained within the geographic boundary of a current country, the response was coded to one of the additional categories contained in the 'Former country' grouping. For example, 'Czechoslovakia' was coded to 'Czechoslovakia (not otherwise specified)'.",
+F1072,QS213EW0070,Country of birth,Africa,"Country of birth is the country in which a person was born. The country of birth question included six tick-box responses: one for each of the four parts of the UK (England, Wales, Scotland and Northern Ireland); one for the Republic of Ireland; and one for 'Elsewhere'. 
+<br/>
+Where a person ticked 'Elsewhere', they were asked to write in the current name of the country in which they were born. Responses are assigned codes based on the <a href="http://www.ons.gov.uk/ons/guide-method/classifications/current-standard-classifications/national-statistics-country-classification/index.html" target="_blank">National Statistics Country Classification</a>.
+<br/>
+The grouping of countries within the classification is broadly regional, but takes into account the grouping of European Union (EU) countries. Countries in the EU are grouped into those that were EU members in March 2001, and those that became members (accession countries) between April 2001 and March 2011 as part of the EU enlargement process. 
+<br/>
+When a person's written response to the country of birth question was a former country name, and the country that it relates to no longer exists and is not wholly contained within the geographic boundary of a current country, the response was coded to one of the additional categories contained in the 'Former country' grouping. For example, 'Czechoslovakia' was coded to 'Czechoslovakia (not otherwise specified)'.",
+F1072,QS213EW0070,Unit,Persons,The unit is for a particular count (e.g. people or households),
+F1121,QS213EW0119,Unit,Persons,The unit is for a particular count (e.g. people or households),
+F1121,QS213EW0119,Country of birth,Middle East and Asia,"Country of birth is the country in which a person was born. The country of birth question included six tick-box responses: one for each of the four parts of the UK (England, Wales, Scotland and Northern Ireland); one for the Republic of Ireland; and one for 'Elsewhere'. 
+<br/>
+Where a person ticked 'Elsewhere', they were asked to write in the current name of the country in which they were born. Responses are assigned codes based on the <a href="http://www.ons.gov.uk/ons/guide-method/classifications/current-standard-classifications/national-statistics-country-classification/index.html" target="_blank">National Statistics Country Classification</a>.
+<br/>
+The grouping of countries within the classification is broadly regional, but takes into account the grouping of European Union (EU) countries. Countries in the EU are grouped into those that were EU members in March 2001, and those that became members (accession countries) between April 2001 and March 2011 as part of the EU enlargement process. 
+<br/>
+When a person's written response to the country of birth question was a former country name, and the country that it relates to no longer exists and is not wholly contained within the geographic boundary of a current country, the response was coded to one of the additional categories contained in the 'Former country' grouping. For example, 'Czechoslovakia' was coded to 'Czechoslovakia (not otherwise specified)'.",
+F1171,QS213EW0169,Country of birth,The Americas and the Caribbean,"Country of birth is the country in which a person was born. The country of birth question included six tick-box responses: one for each of the four parts of the UK (England, Wales, Scotland and Northern Ireland); one for the Republic of Ireland; and one for 'Elsewhere'. 
+<br/>
+Where a person ticked 'Elsewhere', they were asked to write in the current name of the country in which they were born. Responses are assigned codes based on the <a href="http://www.ons.gov.uk/ons/guide-method/classifications/current-standard-classifications/national-statistics-country-classification/index.html" target="_blank">National Statistics Country Classification</a>.
+<br/>
+The grouping of countries within the classification is broadly regional, but takes into account the grouping of European Union (EU) countries. Countries in the EU are grouped into those that were EU members in March 2001, and those that became members (accession countries) between April 2001 and March 2011 as part of the EU enlargement process. 
+<br/>
+When a person's written response to the country of birth question was a former country name, and the country that it relates to no longer exists and is not wholly contained within the geographic boundary of a current country, the response was coded to one of the additional categories contained in the 'Former country' grouping. For example, 'Czechoslovakia' was coded to 'Czechoslovakia (not otherwise specified)'.",
+F1171,QS213EW0169,Unit,Persons,The unit is for a particular count (e.g. people or households),
+F1208,QS213EW0206,Unit,Persons,The unit is for a particular count (e.g. people or households),
+F1208,QS213EW0206,Country of birth,Antarctica and Oceania,"Country of birth is the country in which a person was born. The country of birth question included six tick-box responses: one for each of the four parts of the UK (England, Wales, Scotland and Northern Ireland); one for the Republic of Ireland; and one for 'Elsewhere'. 
+<br/>
+Where a person ticked 'Elsewhere', they were asked to write in the current name of the country in which they were born. Responses are assigned codes based on the <a href="http://www.ons.gov.uk/ons/guide-method/classifications/current-standard-classifications/national-statistics-country-classification/index.html" target="_blank">National Statistics Country Classification</a>.
+<br/>
+The grouping of countries within the classification is broadly regional, but takes into account the grouping of European Union (EU) countries. Countries in the EU are grouped into those that were EU members in March 2001, and those that became members (accession countries) between April 2001 and March 2011 as part of the EU enlargement process. 
+<br/>
+When a person's written response to the country of birth question was a former country name, and the country that it relates to no longer exists and is not wholly contained within the geographic boundary of a current country, the response was coded to one of the additional categories contained in the 'Former country' grouping. For example, 'Czechoslovakia' was coded to 'Czechoslovakia (not otherwise specified)'.",
+F322011,QS203SC0009,Country of birth,Europe\ Channel Islands and Isle of Man,"Country of birth is the country in which a person was born. The country of birth question included six tick-box responses: one for each of the four parts of the UK (England, Wales, Scotland and Northern Ireland); one for the Republic of Ireland; and one for 'Elsewhere'. 
+<br/>
+Where a person ticked 'Elsewhere', they were asked to write in the current name of the country in which they were born. Responses are assigned codes based on the <a href="http://www.ons.gov.uk/ons/guide-method/classifications/current-standard-classifications/national-statistics-country-classification/index.html" target="_blank">National Statistics Country Classification</a>.
+<br/>
+The grouping of countries within the classification is broadly regional, but takes into account the grouping of European Union (EU) countries. Countries in the EU are grouped into those that were EU members in March 2001, and those that became members (accession countries) between April 2001 and March 2011 as part of the EU enlargement process. 
+<br/>
+When a person's written response to the country of birth question was a former country name, and the country that it relates to no longer exists and is not wholly contained within the geographic boundary of a current country, the response was coded to one of the additional categories contained in the 'Former country' grouping. For example, 'Czechoslovakia' was coded to 'Czechoslovakia (not otherwise specified)'.",
+F322011,QS203SC0009,Unit,Persons,The unit is for a particular count (e.g. people or households),
+F322012,QS203SC0010,Unit,Persons,The unit is for a particular count (e.g. people or households),
+F322012,QS203SC0010,Country of birth,Europe\ Republic of Ireland,"Country of birth is the country in which a person was born. The country of birth question included six tick-box responses: one for each of the four parts of the UK (England, Wales, Scotland and Northern Ireland); one for the Republic of Ireland; and one for 'Elsewhere'. 
+<br/>
+Where a person ticked 'Elsewhere', they were asked to write in the current name of the country in which they were born. Responses are assigned codes based on the <a href="http://www.ons.gov.uk/ons/guide-method/classifications/current-standard-classifications/national-statistics-country-classification/index.html" target="_blank">National Statistics Country Classification</a>.
+<br/>
+The grouping of countries within the classification is broadly regional, but takes into account the grouping of European Union (EU) countries. Countries in the EU are grouped into those that were EU members in March 2001, and those that became members (accession countries) between April 2001 and March 2011 as part of the EU enlargement process. 
+<br/>
+When a person's written response to the country of birth question was a former country name, and the country that it relates to no longer exists and is not wholly contained within the geographic boundary of a current country, the response was coded to one of the additional categories contained in the 'Former country' grouping. For example, 'Czechoslovakia' was coded to 'Czechoslovakia (not otherwise specified)'.",
+F322015,QS203SC0030,Country of birth,Non-EU countries,"Country of birth is the country in which a person was born. The country of birth question included six tick-box responses: one for each of the four parts of the UK (England, Wales, Scotland and Northern Ireland); one for the Republic of Ireland; and one for 'Elsewhere'. 
+<br/>
+Where a person ticked 'Elsewhere', they were asked to write in the current name of the country in which they were born. Responses are assigned codes based on the <a href="http://www.ons.gov.uk/ons/guide-method/classifications/current-standard-classifications/national-statistics-country-classification/index.html" target="_blank">National Statistics Country Classification</a>.
+<br/>
+The grouping of countries within the classification is broadly regional, but takes into account the grouping of European Union (EU) countries. Countries in the EU are grouped into those that were EU members in March 2001, and those that became members (accession countries) between April 2001 and March 2011 as part of the EU enlargement process. 
+<br/>
+When a person's written response to the country of birth question was a former country name, and the country that it relates to no longer exists and is not wholly contained within the geographic boundary of a current country, the response was coded to one of the additional categories contained in the 'Former country' grouping. For example, 'Czechoslovakia' was coded to 'Czechoslovakia (not otherwise specified)'.",
+F322015,QS203SC0030,Unit,Persons,The unit is for a particular count (e.g. people or households),
+F322328,QS206NI0025,Unit,Persons,The unit is for a particular count (e.g. people or households),
+F322328,QS206NI0025,Country of birth,Europe\ EU Countries\ Hungary,"Country of birth is the country in which a person was born. The country of birth question included six tick-box responses: one for each of the four parts of the UK (England, Wales, Scotland and Northern Ireland); one for the Republic of Ireland; and one for 'Elsewhere'. 
+<br/>
+Where a person ticked 'Elsewhere', they were asked to write in the current name of the country in which they were born. Responses are assigned codes based on the <a href="http://www.ons.gov.uk/ons/guide-method/classifications/current-standard-classifications/national-statistics-country-classification/index.html" target="_blank">National Statistics Country Classification</a>.
+<br/>
+The grouping of countries within the classification is broadly regional, but takes into account the grouping of European Union (EU) countries. Countries in the EU are grouped into those that were EU members in March 2001, and those that became members (accession countries) between April 2001 and March 2011 as part of the EU enlargement process. 
+<br/>
+When a person's written response to the country of birth question was a former country name, and the country that it relates to no longer exists and is not wholly contained within the geographic boundary of a current country, the response was coded to one of the additional categories contained in the 'Former country' grouping. For example, 'Czechoslovakia' was coded to 'Czechoslovakia (not otherwise specified)'.",
+F322329,QS206NI0026,Country of birth,Europe\ EU Countries\ France,"Country of birth is the country in which a person was born. The country of birth question included six tick-box responses: one for each of the four parts of the UK (England, Wales, Scotland and Northern Ireland); one for the Republic of Ireland; and one for 'Elsewhere'. 
+<br/>
+Where a person ticked 'Elsewhere', they were asked to write in the current name of the country in which they were born. Responses are assigned codes based on the <a href="http://www.ons.gov.uk/ons/guide-method/classifications/current-standard-classifications/national-statistics-country-classification/index.html" target="_blank">National Statistics Country Classification</a>.
+<br/>
+The grouping of countries within the classification is broadly regional, but takes into account the grouping of European Union (EU) countries. Countries in the EU are grouped into those that were EU members in March 2001, and those that became members (accession countries) between April 2001 and March 2011 as part of the EU enlargement process. 
+<br/>
+When a person's written response to the country of birth question was a former country name, and the country that it relates to no longer exists and is not wholly contained within the geographic boundary of a current country, the response was coded to one of the additional categories contained in the 'Former country' grouping. For example, 'Czechoslovakia' was coded to 'Czechoslovakia (not otherwise specified)'.",
+F322329,QS206NI0026,Unit,Persons,The unit is for a particular count (e.g. people or households),
+F322330,QS206NI0027,Unit,Persons,The unit is for a particular count (e.g. people or households),
+F322330,QS206NI0027,Country of birth,Europe\ EU Countries\ Spain,"Country of birth is the country in which a person was born. The country of birth question included six tick-box responses: one for each of the four parts of the UK (England, Wales, Scotland and Northern Ireland); one for the Republic of Ireland; and one for 'Elsewhere'. 
+<br/>
+Where a person ticked 'Elsewhere', they were asked to write in the current name of the country in which they were born. Responses are assigned codes based on the <a href="http://www.ons.gov.uk/ons/guide-method/classifications/current-standard-classifications/national-statistics-country-classification/index.html" target="_blank">National Statistics Country Classification</a>.
+<br/>
+The grouping of countries within the classification is broadly regional, but takes into account the grouping of European Union (EU) countries. Countries in the EU are grouped into those that were EU members in March 2001, and those that became members (accession countries) between April 2001 and March 2011 as part of the EU enlargement process. 
+<br/>
+When a person's written response to the country of birth question was a former country name, and the country that it relates to no longer exists and is not wholly contained within the geographic boundary of a current country, the response was coded to one of the additional categories contained in the 'Former country' grouping. For example, 'Czechoslovakia' was coded to 'Czechoslovakia (not otherwise specified)'.",
+F322331,QS206NI0028,Country of birth,Europe\ EU Countries\ Czech Republic,"Country of birth is the country in which a person was born. The country of birth question included six tick-box responses: one for each of the four parts of the UK (England, Wales, Scotland and Northern Ireland); one for the Republic of Ireland; and one for 'Elsewhere'. 
+<br/>
+Where a person ticked 'Elsewhere', they were asked to write in the current name of the country in which they were born. Responses are assigned codes based on the <a href="http://www.ons.gov.uk/ons/guide-method/classifications/current-standard-classifications/national-statistics-country-classification/index.html" target="_blank">National Statistics Country Classification</a>.
+<br/>
+The grouping of countries within the classification is broadly regional, but takes into account the grouping of European Union (EU) countries. Countries in the EU are grouped into those that were EU members in March 2001, and those that became members (accession countries) between April 2001 and March 2011 as part of the EU enlargement process. 
+<br/>
+When a person's written response to the country of birth question was a former country name, and the country that it relates to no longer exists and is not wholly contained within the geographic boundary of a current country, the response was coded to one of the additional categories contained in the 'Former country' grouping. For example, 'Czechoslovakia' was coded to 'Czechoslovakia (not otherwise specified)'.",
+F322331,QS206NI0028,Unit,Persons,The unit is for a particular count (e.g. people or households),
+F322332,QS206NI0029,Unit,Persons,The unit is for a particular count (e.g. people or households),
+F322332,QS206NI0029,Country of birth,Europe\ EU Countries\ Bulgaria,"Country of birth is the country in which a person was born. The country of birth question included six tick-box responses: one for each of the four parts of the UK (England, Wales, Scotland and Northern Ireland); one for the Republic of Ireland; and one for 'Elsewhere'. 
+<br/>
+Where a person ticked 'Elsewhere', they were asked to write in the current name of the country in which they were born. Responses are assigned codes based on the <a href="http://www.ons.gov.uk/ons/guide-method/classifications/current-standard-classifications/national-statistics-country-classification/index.html" target="_blank">National Statistics Country Classification</a>.
+<br/>
+The grouping of countries within the classification is broadly regional, but takes into account the grouping of European Union (EU) countries. Countries in the EU are grouped into those that were EU members in March 2001, and those that became members (accession countries) between April 2001 and March 2011 as part of the EU enlargement process. 
+<br/>
+When a person's written response to the country of birth question was a former country name, and the country that it relates to no longer exists and is not wholly contained within the geographic boundary of a current country, the response was coded to one of the additional categories contained in the 'Former country' grouping. For example, 'Czechoslovakia' was coded to 'Czechoslovakia (not otherwise specified)'.",
+F322333,QS206NI0030,Country of birth,Europe\ EU Countries\ Italy,"Country of birth is the country in which a person was born. The country of birth question included six tick-box responses: one for each of the four parts of the UK (England, Wales, Scotland and Northern Ireland); one for the Republic of Ireland; and one for 'Elsewhere'. 
+<br/>
+Where a person ticked 'Elsewhere', they were asked to write in the current name of the country in which they were born. Responses are assigned codes based on the <a href="http://www.ons.gov.uk/ons/guide-method/classifications/current-standard-classifications/national-statistics-country-classification/index.html" target="_blank">National Statistics Country Classification</a>.
+<br/>
+The grouping of countries within the classification is broadly regional, but takes into account the grouping of European Union (EU) countries. Countries in the EU are grouped into those that were EU members in March 2001, and those that became members (accession countries) between April 2001 and March 2011 as part of the EU enlargement process. 
+<br/>
+When a person's written response to the country of birth question was a former country name, and the country that it relates to no longer exists and is not wholly contained within the geographic boundary of a current country, the response was coded to one of the additional categories contained in the 'Former country' grouping. For example, 'Czechoslovakia' was coded to 'Czechoslovakia (not otherwise specified)'.",
+F322333,QS206NI0030,Unit,Persons,The unit is for a particular count (e.g. people or households),
+F322334,QS206NI0031,Unit,Persons,The unit is for a particular count (e.g. people or households),
+F322334,QS206NI0031,Country of birth,Europe\ EU Countries\ Netherlands,"Country of birth is the country in which a person was born. The country of birth question included six tick-box responses: one for each of the four parts of the UK (England, Wales, Scotland and Northern Ireland); one for the Republic of Ireland; and one for 'Elsewhere'. 
+<br/>
+Where a person ticked 'Elsewhere', they were asked to write in the current name of the country in which they were born. Responses are assigned codes based on the <a href="http://www.ons.gov.uk/ons/guide-method/classifications/current-standard-classifications/national-statistics-country-classification/index.html" target="_blank">National Statistics Country Classification</a>.
+<br/>
+The grouping of countries within the classification is broadly regional, but takes into account the grouping of European Union (EU) countries. Countries in the EU are grouped into those that were EU members in March 2001, and those that became members (accession countries) between April 2001 and March 2011 as part of the EU enlargement process. 
+<br/>
+When a person's written response to the country of birth question was a former country name, and the country that it relates to no longer exists and is not wholly contained within the geographic boundary of a current country, the response was coded to one of the additional categories contained in the 'Former country' grouping. For example, 'Czechoslovakia' was coded to 'Czechoslovakia (not otherwise specified)'.",
+F322335,QS206NI0032,Country of birth,Europe\ EU Countries\ Malta,"Country of birth is the country in which a person was born. The country of birth question included six tick-box responses: one for each of the four parts of the UK (England, Wales, Scotland and Northern Ireland); one for the Republic of Ireland; and one for 'Elsewhere'. 
+<br/>
+Where a person ticked 'Elsewhere', they were asked to write in the current name of the country in which they were born. Responses are assigned codes based on the <a href="http://www.ons.gov.uk/ons/guide-method/classifications/current-standard-classifications/national-statistics-country-classification/index.html" target="_blank">National Statistics Country Classification</a>.
+<br/>
+The grouping of countries within the classification is broadly regional, but takes into account the grouping of European Union (EU) countries. Countries in the EU are grouped into those that were EU members in March 2001, and those that became members (accession countries) between April 2001 and March 2011 as part of the EU enlargement process. 
+<br/>
+When a person's written response to the country of birth question was a former country name, and the country that it relates to no longer exists and is not wholly contained within the geographic boundary of a current country, the response was coded to one of the additional categories contained in the 'Former country' grouping. For example, 'Czechoslovakia' was coded to 'Czechoslovakia (not otherwise specified)'.",
+F322335,QS206NI0032,Unit,Persons,The unit is for a particular count (e.g. people or households),
+F322336,QS206NI0033,Unit,Persons,The unit is for a particular count (e.g. people or households),
+F322336,QS206NI0033,Country of birth,Europe\ EU Countries\ Belgium,"Country of birth is the country in which a person was born. The country of birth question included six tick-box responses: one for each of the four parts of the UK (England, Wales, Scotland and Northern Ireland); one for the Republic of Ireland; and one for 'Elsewhere'. 
+<br/>
+Where a person ticked 'Elsewhere', they were asked to write in the current name of the country in which they were born. Responses are assigned codes based on the <a href="http://www.ons.gov.uk/ons/guide-method/classifications/current-standard-classifications/national-statistics-country-classification/index.html" target="_blank">National Statistics Country Classification</a>.
+<br/>
+The grouping of countries within the classification is broadly regional, but takes into account the grouping of European Union (EU) countries. Countries in the EU are grouped into those that were EU members in March 2001, and those that became members (accession countries) between April 2001 and March 2011 as part of the EU enlargement process. 
+<br/>
+When a person's written response to the country of birth question was a former country name, and the country that it relates to no longer exists and is not wholly contained within the geographic boundary of a current country, the response was coded to one of the additional categories contained in the 'Former country' grouping. For example, 'Czechoslovakia' was coded to 'Czechoslovakia (not otherwise specified)'.",
+F322337,QS206NI0034,Country of birth,Europe\ EU Countries\ Sweden,"Country of birth is the country in which a person was born. The country of birth question included six tick-box responses: one for each of the four parts of the UK (England, Wales, Scotland and Northern Ireland); one for the Republic of Ireland; and one for 'Elsewhere'. 
+<br/>
+Where a person ticked 'Elsewhere', they were asked to write in the current name of the country in which they were born. Responses are assigned codes based on the <a href="http://www.ons.gov.uk/ons/guide-method/classifications/current-standard-classifications/national-statistics-country-classification/index.html" target="_blank">National Statistics Country Classification</a>.
+<br/>
+The grouping of countries within the classification is broadly regional, but takes into account the grouping of European Union (EU) countries. Countries in the EU are grouped into those that were EU members in March 2001, and those that became members (accession countries) between April 2001 and March 2011 as part of the EU enlargement process. 
+<br/>
+When a person's written response to the country of birth question was a former country name, and the country that it relates to no longer exists and is not wholly contained within the geographic boundary of a current country, the response was coded to one of the additional categories contained in the 'Former country' grouping. For example, 'Czechoslovakia' was coded to 'Czechoslovakia (not otherwise specified)'.",
+F322337,QS206NI0034,Unit,Persons,The unit is for a particular count (e.g. people or households),
+F322338,QS206NI0035,Unit,Persons,The unit is for a particular count (e.g. people or households),
+F322338,QS206NI0035,Country of birth,Europe\ EU Countries\ Greece,"Country of birth is the country in which a person was born. The country of birth question included six tick-box responses: one for each of the four parts of the UK (England, Wales, Scotland and Northern Ireland); one for the Republic of Ireland; and one for 'Elsewhere'. 
+<br/>
+Where a person ticked 'Elsewhere', they were asked to write in the current name of the country in which they were born. Responses are assigned codes based on the <a href="http://www.ons.gov.uk/ons/guide-method/classifications/current-standard-classifications/national-statistics-country-classification/index.html" target="_blank">National Statistics Country Classification</a>.
+<br/>
+The grouping of countries within the classification is broadly regional, but takes into account the grouping of European Union (EU) countries. Countries in the EU are grouped into those that were EU members in March 2001, and those that became members (accession countries) between April 2001 and March 2011 as part of the EU enlargement process. 
+<br/>
+When a person's written response to the country of birth question was a former country name, and the country that it relates to no longer exists and is not wholly contained within the geographic boundary of a current country, the response was coded to one of the additional categories contained in the 'Former country' grouping. For example, 'Czechoslovakia' was coded to 'Czechoslovakia (not otherwise specified)'.",
+F322339,QS206NI0036,Country of birth,Europe\ EU Countries\ Gibraltar,"Country of birth is the country in which a person was born. The country of birth question included six tick-box responses: one for each of the four parts of the UK (England, Wales, Scotland and Northern Ireland); one for the Republic of Ireland; and one for 'Elsewhere'. 
+<br/>
+Where a person ticked 'Elsewhere', they were asked to write in the current name of the country in which they were born. Responses are assigned codes based on the <a href="http://www.ons.gov.uk/ons/guide-method/classifications/current-standard-classifications/national-statistics-country-classification/index.html" target="_blank">National Statistics Country Classification</a>.
+<br/>
+The grouping of countries within the classification is broadly regional, but takes into account the grouping of European Union (EU) countries. Countries in the EU are grouped into those that were EU members in March 2001, and those that became members (accession countries) between April 2001 and March 2011 as part of the EU enlargement process. 
+<br/>
+When a person's written response to the country of birth question was a former country name, and the country that it relates to no longer exists and is not wholly contained within the geographic boundary of a current country, the response was coded to one of the additional categories contained in the 'Former country' grouping. For example, 'Czechoslovakia' was coded to 'Czechoslovakia (not otherwise specified)'.",
+F322339,QS206NI0036,Unit,Persons,The unit is for a particular count (e.g. people or households),
+F322340,QS206NI0037,Unit,Persons,The unit is for a particular count (e.g. people or households),
+F322340,QS206NI0037,Country of birth,Europe\ EU Countries\ Austria,"Country of birth is the country in which a person was born. The country of birth question included six tick-box responses: one for each of the four parts of the UK (England, Wales, Scotland and Northern Ireland); one for the Republic of Ireland; and one for 'Elsewhere'. 
+<br/>
+Where a person ticked 'Elsewhere', they were asked to write in the current name of the country in which they were born. Responses are assigned codes based on the <a href="http://www.ons.gov.uk/ons/guide-method/classifications/current-standard-classifications/national-statistics-country-classification/index.html" target="_blank">National Statistics Country Classification</a>.
+<br/>
+The grouping of countries within the classification is broadly regional, but takes into account the grouping of European Union (EU) countries. Countries in the EU are grouped into those that were EU members in March 2001, and those that became members (accession countries) between April 2001 and March 2011 as part of the EU enlargement process. 
+<br/>
+When a person's written response to the country of birth question was a former country name, and the country that it relates to no longer exists and is not wholly contained within the geographic boundary of a current country, the response was coded to one of the additional categories contained in the 'Former country' grouping. For example, 'Czechoslovakia' was coded to 'Czechoslovakia (not otherwise specified)'.",
+F322341,QS206NI0038,Country of birth,Europe\ EU Countries\ Denmark,"Country of birth is the country in which a person was born. The country of birth question included six tick-box responses: one for each of the four parts of the UK (England, Wales, Scotland and Northern Ireland); one for the Republic of Ireland; and one for 'Elsewhere'. 
+<br/>
+Where a person ticked 'Elsewhere', they were asked to write in the current name of the country in which they were born. Responses are assigned codes based on the <a href="http://www.ons.gov.uk/ons/guide-method/classifications/current-standard-classifications/national-statistics-country-classification/index.html" target="_blank">National Statistics Country Classification</a>.
+<br/>
+The grouping of countries within the classification is broadly regional, but takes into account the grouping of European Union (EU) countries. Countries in the EU are grouped into those that were EU members in March 2001, and those that became members (accession countries) between April 2001 and March 2011 as part of the EU enlargement process. 
+<br/>
+When a person's written response to the country of birth question was a former country name, and the country that it relates to no longer exists and is not wholly contained within the geographic boundary of a current country, the response was coded to one of the additional categories contained in the 'Former country' grouping. For example, 'Czechoslovakia' was coded to 'Czechoslovakia (not otherwise specified)'.",
+F322341,QS206NI0038,Unit,Persons,The unit is for a particular count (e.g. people or households),
+F322342,QS206NI0039,Unit,Persons,The unit is for a particular count (e.g. people or households),
+F322342,QS206NI0039,Country of birth,Europe\ EU Countries\ Estonia,"Country of birth is the country in which a person was born. The country of birth question included six tick-box responses: one for each of the four parts of the UK (England, Wales, Scotland and Northern Ireland); one for the Republic of Ireland; and one for 'Elsewhere'. 
+<br/>
+Where a person ticked 'Elsewhere', they were asked to write in the current name of the country in which they were born. Responses are assigned codes based on the <a href="http://www.ons.gov.uk/ons/guide-method/classifications/current-standard-classifications/national-statistics-country-classification/index.html" target="_blank">National Statistics Country Classification</a>.
+<br/>
+The grouping of countries within the classification is broadly regional, but takes into account the grouping of European Union (EU) countries. Countries in the EU are grouped into those that were EU members in March 2001, and those that became members (accession countries) between April 2001 and March 2011 as part of the EU enlargement process. 
+<br/>
+When a person's written response to the country of birth question was a former country name, and the country that it relates to no longer exists and is not wholly contained within the geographic boundary of a current country, the response was coded to one of the additional categories contained in the 'Former country' grouping. For example, 'Czechoslovakia' was coded to 'Czechoslovakia (not otherwise specified)'.",
+F322343,QS206NI0040,Country of birth,Europe\ EU Countries\ Finland,"Country of birth is the country in which a person was born. The country of birth question included six tick-box responses: one for each of the four parts of the UK (England, Wales, Scotland and Northern Ireland); one for the Republic of Ireland; and one for 'Elsewhere'. 
+<br/>
+Where a person ticked 'Elsewhere', they were asked to write in the current name of the country in which they were born. Responses are assigned codes based on the <a href="http://www.ons.gov.uk/ons/guide-method/classifications/current-standard-classifications/national-statistics-country-classification/index.html" target="_blank">National Statistics Country Classification</a>.
+<br/>
+The grouping of countries within the classification is broadly regional, but takes into account the grouping of European Union (EU) countries. Countries in the EU are grouped into those that were EU members in March 2001, and those that became members (accession countries) between April 2001 and March 2011 as part of the EU enlargement process. 
+<br/>
+When a person's written response to the country of birth question was a former country name, and the country that it relates to no longer exists and is not wholly contained within the geographic boundary of a current country, the response was coded to one of the additional categories contained in the 'Former country' grouping. For example, 'Czechoslovakia' was coded to 'Czechoslovakia (not otherwise specified)'.",
+F322343,QS206NI0040,Unit,Persons,The unit is for a particular count (e.g. people or households),
+F322344,QS206NI0041,Unit,Persons,The unit is for a particular count (e.g. people or households),
+F322344,QS206NI0041,Country of birth,Europe\ EU Countries\ Canary Islands,"Country of birth is the country in which a person was born. The country of birth question included six tick-box responses: one for each of the four parts of the UK (England, Wales, Scotland and Northern Ireland); one for the Republic of Ireland; and one for 'Elsewhere'. 
+<br/>
+Where a person ticked 'Elsewhere', they were asked to write in the current name of the country in which they were born. Responses are assigned codes based on the <a href="http://www.ons.gov.uk/ons/guide-method/classifications/current-standard-classifications/national-statistics-country-classification/index.html" target="_blank">National Statistics Country Classification</a>.
+<br/>
+The grouping of countries within the classification is broadly regional, but takes into account the grouping of European Union (EU) countries. Countries in the EU are grouped into those that were EU members in March 2001, and those that became members (accession countries) between April 2001 and March 2011 as part of the EU enlargement process. 
+<br/>
+When a person's written response to the country of birth question was a former country name, and the country that it relates to no longer exists and is not wholly contained within the geographic boundary of a current country, the response was coded to one of the additional categories contained in the 'Former country' grouping. For example, 'Czechoslovakia' was coded to 'Czechoslovakia (not otherwise specified)'.",
+F322345,QS206NI0042,Country of birth,Europe\ EU Countries\ Slovenia,"Country of birth is the country in which a person was born. The country of birth question included six tick-box responses: one for each of the four parts of the UK (England, Wales, Scotland and Northern Ireland); one for the Republic of Ireland; and one for 'Elsewhere'. 
+<br/>
+Where a person ticked 'Elsewhere', they were asked to write in the current name of the country in which they were born. Responses are assigned codes based on the <a href="http://www.ons.gov.uk/ons/guide-method/classifications/current-standard-classifications/national-statistics-country-classification/index.html" target="_blank">National Statistics Country Classification</a>.
+<br/>
+The grouping of countries within the classification is broadly regional, but takes into account the grouping of European Union (EU) countries. Countries in the EU are grouped into those that were EU members in March 2001, and those that became members (accession countries) between April 2001 and March 2011 as part of the EU enlargement process. 
+<br/>
+When a person's written response to the country of birth question was a former country name, and the country that it relates to no longer exists and is not wholly contained within the geographic boundary of a current country, the response was coded to one of the additional categories contained in the 'Former country' grouping. For example, 'Czechoslovakia' was coded to 'Czechoslovakia (not otherwise specified)'.",
+F322345,QS206NI0042,Unit,Persons,The unit is for a particular count (e.g. people or households),
+F322346,QS206NI0043,Unit,Persons,The unit is for a particular count (e.g. people or households),
+F322346,QS206NI0043,Country of birth,Europe\ EU Countries\ Luxembourg,"Country of birth is the country in which a person was born. The country of birth question included six tick-box responses: one for each of the four parts of the UK (England, Wales, Scotland and Northern Ireland); one for the Republic of Ireland; and one for 'Elsewhere'. 
+<br/>
+Where a person ticked 'Elsewhere', they were asked to write in the current name of the country in which they were born. Responses are assigned codes based on the <a href="http://www.ons.gov.uk/ons/guide-method/classifications/current-standard-classifications/national-statistics-country-classification/index.html" target="_blank">National Statistics Country Classification</a>.
+<br/>
+The grouping of countries within the classification is broadly regional, but takes into account the grouping of European Union (EU) countries. Countries in the EU are grouped into those that were EU members in March 2001, and those that became members (accession countries) between April 2001 and March 2011 as part of the EU enlargement process. 
+<br/>
+When a person's written response to the country of birth question was a former country name, and the country that it relates to no longer exists and is not wholly contained within the geographic boundary of a current country, the response was coded to one of the additional categories contained in the 'Former country' grouping. For example, 'Czechoslovakia' was coded to 'Czechoslovakia (not otherwise specified)'.",
+F322347,QS206NI0045,Country of birth,Europe\ EU Countries\ Former European countries,"Country of birth is the country in which a person was born. The country of birth question included six tick-box responses: one for each of the four parts of the UK (England, Wales, Scotland and Northern Ireland); one for the Republic of Ireland; and one for 'Elsewhere'. 
+<br/>
+Where a person ticked 'Elsewhere', they were asked to write in the current name of the country in which they were born. Responses are assigned codes based on the <a href="http://www.ons.gov.uk/ons/guide-method/classifications/current-standard-classifications/national-statistics-country-classification/index.html" target="_blank">National Statistics Country Classification</a>.
+<br/>
+The grouping of countries within the classification is broadly regional, but takes into account the grouping of European Union (EU) countries. Countries in the EU are grouped into those that were EU members in March 2001, and those that became members (accession countries) between April 2001 and March 2011 as part of the EU enlargement process. 
+<br/>
+When a person's written response to the country of birth question was a former country name, and the country that it relates to no longer exists and is not wholly contained within the geographic boundary of a current country, the response was coded to one of the additional categories contained in the 'Former country' grouping. For example, 'Czechoslovakia' was coded to 'Czechoslovakia (not otherwise specified)'.",
+F322347,QS206NI0045,Unit,Persons,The unit is for a particular count (e.g. people or households),
+F322351,QS206NI0049,Unit,Persons,The unit is for a particular count (e.g. people or households),
+F322351,QS206NI0049,Country of birth,Non-EU countries in Northern and Western Europe,"Country of birth is the country in which a person was born. The country of birth question included six tick-box responses: one for each of the four parts of the UK (England, Wales, Scotland and Northern Ireland); one for the Republic of Ireland; and one for 'Elsewhere'. 
+<br/>
+Where a person ticked 'Elsewhere', they were asked to write in the current name of the country in which they were born. Responses are assigned codes based on the <a href="http://www.ons.gov.uk/ons/guide-method/classifications/current-standard-classifications/national-statistics-country-classification/index.html" target="_blank">National Statistics Country Classification</a>.
+<br/>
+The grouping of countries within the classification is broadly regional, but takes into account the grouping of European Union (EU) countries. Countries in the EU are grouped into those that were EU members in March 2001, and those that became members (accession countries) between April 2001 and March 2011 as part of the EU enlargement process. 
+<br/>
+When a person's written response to the country of birth question was a former country name, and the country that it relates to no longer exists and is not wholly contained within the geographic boundary of a current country, the response was coded to one of the additional categories contained in the 'Former country' grouping. For example, 'Czechoslovakia' was coded to 'Czechoslovakia (not otherwise specified)'.",
+F322356,QS206NI0054,Country of birth,Non-EU countries in Southern and Eastern Europe,"Country of birth is the country in which a person was born. The country of birth question included six tick-box responses: one for each of the four parts of the UK (England, Wales, Scotland and Northern Ireland); one for the Republic of Ireland; and one for 'Elsewhere'. 
+<br/>
+Where a person ticked 'Elsewhere', they were asked to write in the current name of the country in which they were born. Responses are assigned codes based on the <a href="http://www.ons.gov.uk/ons/guide-method/classifications/current-standard-classifications/national-statistics-country-classification/index.html" target="_blank">National Statistics Country Classification</a>.
+<br/>
+The grouping of countries within the classification is broadly regional, but takes into account the grouping of European Union (EU) countries. Countries in the EU are grouped into those that were EU members in March 2001, and those that became members (accession countries) between April 2001 and March 2011 as part of the EU enlargement process. 
+<br/>
+When a person's written response to the country of birth question was a former country name, and the country that it relates to no longer exists and is not wholly contained within the geographic boundary of a current country, the response was coded to one of the additional categories contained in the 'Former country' grouping. For example, 'Czechoslovakia' was coded to 'Czechoslovakia (not otherwise specified)'.",
+F322356,QS206NI0054,Unit,Persons,The unit is for a particular count (e.g. people or households),
+F322373,QS206NI0161,Unit,Persons,The unit is for a particular count (e.g. people or households),
+F322373,QS206NI0161,Country of birth,North America and the Caribbean\ Canada,"Country of birth is the country in which a person was born. The country of birth question included six tick-box responses: one for each of the four parts of the UK (England, Wales, Scotland and Northern Ireland); one for the Republic of Ireland; and one for 'Elsewhere'. 
+<br/>
+Where a person ticked 'Elsewhere', they were asked to write in the current name of the country in which they were born. Responses are assigned codes based on the <a href="http://www.ons.gov.uk/ons/guide-method/classifications/current-standard-classifications/national-statistics-country-classification/index.html" target="_blank">National Statistics Country Classification</a>.
+<br/>
+The grouping of countries within the classification is broadly regional, but takes into account the grouping of European Union (EU) countries. Countries in the EU are grouped into those that were EU members in March 2001, and those that became members (accession countries) between April 2001 and March 2011 as part of the EU enlargement process. 
+<br/>
+When a person's written response to the country of birth question was a former country name, and the country that it relates to no longer exists and is not wholly contained within the geographic boundary of a current country, the response was coded to one of the additional categories contained in the 'Former country' grouping. For example, 'Czechoslovakia' was coded to 'Czechoslovakia (not otherwise specified)'.",
+F322374,QS206NI0162,Country of birth,North America and the Caribbean\ Caribbean,"Country of birth is the country in which a person was born. The country of birth question included six tick-box responses: one for each of the four parts of the UK (England, Wales, Scotland and Northern Ireland); one for the Republic of Ireland; and one for 'Elsewhere'. 
+<br/>
+Where a person ticked 'Elsewhere', they were asked to write in the current name of the country in which they were born. Responses are assigned codes based on the <a href="http://www.ons.gov.uk/ons/guide-method/classifications/current-standard-classifications/national-statistics-country-classification/index.html" target="_blank">National Statistics Country Classification</a>.
+<br/>
+The grouping of countries within the classification is broadly regional, but takes into account the grouping of European Union (EU) countries. Countries in the EU are grouped into those that were EU members in March 2001, and those that became members (accession countries) between April 2001 and March 2011 as part of the EU enlargement process. 
+<br/>
+When a person's written response to the country of birth question was a former country name, and the country that it relates to no longer exists and is not wholly contained within the geographic boundary of a current country, the response was coded to one of the additional categories contained in the 'Former country' grouping. For example, 'Czechoslovakia' was coded to 'Czechoslovakia (not otherwise specified)'.",
+F322374,QS206NI0162,Unit,Persons,The unit is for a particular count (e.g. people or households),
+F322382,QS206NI0170,Unit,Persons,The unit is for a particular count (e.g. people or households),
+F322382,QS206NI0170,Country of birth,North America and the Caribbean\ USA,"Country of birth is the country in which a person was born. The country of birth question included six tick-box responses: one for each of the four parts of the UK (England, Wales, Scotland and Northern Ireland); one for the Republic of Ireland; and one for 'Elsewhere'. 
+<br/>
+Where a person ticked 'Elsewhere', they were asked to write in the current name of the country in which they were born. Responses are assigned codes based on the <a href="http://www.ons.gov.uk/ons/guide-method/classifications/current-standard-classifications/national-statistics-country-classification/index.html" target="_blank">National Statistics Country Classification</a>.
+<br/>
+The grouping of countries within the classification is broadly regional, but takes into account the grouping of European Union (EU) countries. Countries in the EU are grouped into those that were EU members in March 2001, and those that became members (accession countries) between April 2001 and March 2011 as part of the EU enlargement process. 
+<br/>
+When a person's written response to the country of birth question was a former country name, and the country that it relates to no longer exists and is not wholly contained within the geographic boundary of a current country, the response was coded to one of the additional categories contained in the 'Former country' grouping. For example, 'Czechoslovakia' was coded to 'Czechoslovakia (not otherwise specified)'.",
+F322383,QS206NI0171,Country of birth,Other North America,"Country of birth is the country in which a person was born. The country of birth question included six tick-box responses: one for each of the four parts of the UK (England, Wales, Scotland and Northern Ireland); one for the Republic of Ireland; and one for 'Elsewhere'. 
+<br/>
+Where a person ticked 'Elsewhere', they were asked to write in the current name of the country in which they were born. Responses are assigned codes based on the <a href="http://www.ons.gov.uk/ons/guide-method/classifications/current-standard-classifications/national-statistics-country-classification/index.html" target="_blank">National Statistics Country Classification</a>.
+<br/>
+The grouping of countries within the classification is broadly regional, but takes into account the grouping of European Union (EU) countries. Countries in the EU are grouped into those that were EU members in March 2001, and those that became members (accession countries) between April 2001 and March 2011 as part of the EU enlargement process. 
+<br/>
+When a person's written response to the country of birth question was a former country name, and the country that it relates to no longer exists and is not wholly contained within the geographic boundary of a current country, the response was coded to one of the additional categories contained in the 'Former country' grouping. For example, 'Czechoslovakia' was coded to 'Czechoslovakia (not otherwise specified)'.",
+F322383,QS206NI0171,Unit,Persons,The unit is for a particular count (e.g. people or households),
+F322387,QS206NI0175,Unit,Persons,The unit is for a particular count (e.g. people or households),
+F322387,QS206NI0175,Country of birth,Central America,"Country of birth is the country in which a person was born. The country of birth question included six tick-box responses: one for each of the four parts of the UK (England, Wales, Scotland and Northern Ireland); one for the Republic of Ireland; and one for 'Elsewhere'. 
+<br/>
+Where a person ticked 'Elsewhere', they were asked to write in the current name of the country in which they were born. Responses are assigned codes based on the <a href="http://www.ons.gov.uk/ons/guide-method/classifications/current-standard-classifications/national-statistics-country-classification/index.html" target="_blank">National Statistics Country Classification</a>.
+<br/>
+The grouping of countries within the classification is broadly regional, but takes into account the grouping of European Union (EU) countries. Countries in the EU are grouped into those that were EU members in March 2001, and those that became members (accession countries) between April 2001 and March 2011 as part of the EU enlargement process. 
+<br/>
+When a person's written response to the country of birth question was a former country name, and the country that it relates to no longer exists and is not wholly contained within the geographic boundary of a current country, the response was coded to one of the additional categories contained in the 'Former country' grouping. For example, 'Czechoslovakia' was coded to 'Czechoslovakia (not otherwise specified)'.",
+F322394,QS206NI0182,Country of birth,South America,"Country of birth is the country in which a person was born. The country of birth question included six tick-box responses: one for each of the four parts of the UK (England, Wales, Scotland and Northern Ireland); one for the Republic of Ireland; and one for 'Elsewhere'. 
+<br/>
+Where a person ticked 'Elsewhere', they were asked to write in the current name of the country in which they were born. Responses are assigned codes based on the <a href="http://www.ons.gov.uk/ons/guide-method/classifications/current-standard-classifications/national-statistics-country-classification/index.html" target="_blank">National Statistics Country Classification</a>.
+<br/>
+The grouping of countries within the classification is broadly regional, but takes into account the grouping of European Union (EU) countries. Countries in the EU are grouped into those that were EU members in March 2001, and those that became members (accession countries) between April 2001 and March 2011 as part of the EU enlargement process. 
+<br/>
+When a person's written response to the country of birth question was a former country name, and the country that it relates to no longer exists and is not wholly contained within the geographic boundary of a current country, the response was coded to one of the additional categories contained in the 'Former country' grouping. For example, 'Czechoslovakia' was coded to 'Czechoslovakia (not otherwise specified)'.",
+F322394,QS206NI0182,Unit,Persons,The unit is for a particular count (e.g. people or households),
+F322408,QS208NI0010,Unit,Persons,The unit is for a particular count (e.g. people or households),
+F322408,QS208NI0010,Country of birth,Europe\ Ireland (not otherwise specified),"Country of birth is the country in which a person was born. The country of birth question included six tick-box responses: one for each of the four parts of the UK (England, Wales, Scotland and Northern Ireland); one for the Republic of Ireland; and one for 'Elsewhere'. 
+<br/>
+Where a person ticked 'Elsewhere', they were asked to write in the current name of the country in which they were born. Responses are assigned codes based on the <a href="http://www.ons.gov.uk/ons/guide-method/classifications/current-standard-classifications/national-statistics-country-classification/index.html" target="_blank">National Statistics Country Classification</a>.
+<br/>
+The grouping of countries within the classification is broadly regional, but takes into account the grouping of European Union (EU) countries. Countries in the EU are grouped into those that were EU members in March 2001, and those that became members (accession countries) between April 2001 and March 2011 as part of the EU enlargement process. 
+<br/>
+When a person's written response to the country of birth question was a former country name, and the country that it relates to no longer exists and is not wholly contained within the geographic boundary of a current country, the response was coded to one of the additional categories contained in the 'Former country' grouping. For example, 'Czechoslovakia' was coded to 'Czechoslovakia (not otherwise specified)'.",
+F322409,QS208NI0013,Country of birth,Europe\ EU countries,"Country of birth is the country in which a person was born. The country of birth question included six tick-box responses: one for each of the four parts of the UK (England, Wales, Scotland and Northern Ireland); one for the Republic of Ireland; and one for 'Elsewhere'. 
+<br/>
+Where a person ticked 'Elsewhere', they were asked to write in the current name of the country in which they were born. Responses are assigned codes based on the <a href="http://www.ons.gov.uk/ons/guide-method/classifications/current-standard-classifications/national-statistics-country-classification/index.html" target="_blank">National Statistics Country Classification</a>.
+<br/>
+The grouping of countries within the classification is broadly regional, but takes into account the grouping of European Union (EU) countries. Countries in the EU are grouped into those that were EU members in March 2001, and those that became members (accession countries) between April 2001 and March 2011 as part of the EU enlargement process. 
+<br/>
+When a person's written response to the country of birth question was a former country name, and the country that it relates to no longer exists and is not wholly contained within the geographic boundary of a current country, the response was coded to one of the additional categories contained in the 'Former country' grouping. For example, 'Czechoslovakia' was coded to 'Czechoslovakia (not otherwise specified)'.",
+F322409,QS208NI0013,Unit,Persons,The unit is for a particular count (e.g. people or households),
+F322410,QS208NI0014,Unit,Persons,The unit is for a particular count (e.g. people or households),
+F322410,QS208NI0014,Country of birth,Europe\ EU countries\ Germany,"Country of birth is the country in which a person was born. The country of birth question included six tick-box responses: one for each of the four parts of the UK (England, Wales, Scotland and Northern Ireland); one for the Republic of Ireland; and one for 'Elsewhere'. 
+<br/>
+Where a person ticked 'Elsewhere', they were asked to write in the current name of the country in which they were born. Responses are assigned codes based on the <a href="http://www.ons.gov.uk/ons/guide-method/classifications/current-standard-classifications/national-statistics-country-classification/index.html" target="_blank">National Statistics Country Classification</a>.
+<br/>
+The grouping of countries within the classification is broadly regional, but takes into account the grouping of European Union (EU) countries. Countries in the EU are grouped into those that were EU members in March 2001, and those that became members (accession countries) between April 2001 and March 2011 as part of the EU enlargement process. 
+<br/>
+When a person's written response to the country of birth question was a former country name, and the country that it relates to no longer exists and is not wholly contained within the geographic boundary of a current country, the response was coded to one of the additional categories contained in the 'Former country' grouping. For example, 'Czechoslovakia' was coded to 'Czechoslovakia (not otherwise specified)'.",
+F322411,QS208NI0015,Country of birth,Europe\ EU countries\ Latvia,"Country of birth is the country in which a person was born. The country of birth question included six tick-box responses: one for each of the four parts of the UK (England, Wales, Scotland and Northern Ireland); one for the Republic of Ireland; and one for 'Elsewhere'. 
+<br/>
+Where a person ticked 'Elsewhere', they were asked to write in the current name of the country in which they were born. Responses are assigned codes based on the <a href="http://www.ons.gov.uk/ons/guide-method/classifications/current-standard-classifications/national-statistics-country-classification/index.html" target="_blank">National Statistics Country Classification</a>.
+<br/>
+The grouping of countries within the classification is broadly regional, but takes into account the grouping of European Union (EU) countries. Countries in the EU are grouped into those that were EU members in March 2001, and those that became members (accession countries) between April 2001 and March 2011 as part of the EU enlargement process. 
+<br/>
+When a person's written response to the country of birth question was a former country name, and the country that it relates to no longer exists and is not wholly contained within the geographic boundary of a current country, the response was coded to one of the additional categories contained in the 'Former country' grouping. For example, 'Czechoslovakia' was coded to 'Czechoslovakia (not otherwise specified)'.",
+F322411,QS208NI0015,Unit,Persons,The unit is for a particular count (e.g. people or households),
+F322412,QS208NI0016,Unit,Persons,The unit is for a particular count (e.g. people or households),
+F322412,QS208NI0016,Country of birth,Europe\ EU countries\ Lithuania,"Country of birth is the country in which a person was born. The country of birth question included six tick-box responses: one for each of the four parts of the UK (England, Wales, Scotland and Northern Ireland); one for the Republic of Ireland; and one for 'Elsewhere'. 
+<br/>
+Where a person ticked 'Elsewhere', they were asked to write in the current name of the country in which they were born. Responses are assigned codes based on the <a href="http://www.ons.gov.uk/ons/guide-method/classifications/current-standard-classifications/national-statistics-country-classification/index.html" target="_blank">National Statistics Country Classification</a>.
+<br/>
+The grouping of countries within the classification is broadly regional, but takes into account the grouping of European Union (EU) countries. Countries in the EU are grouped into those that were EU members in March 2001, and those that became members (accession countries) between April 2001 and March 2011 as part of the EU enlargement process. 
+<br/>
+When a person's written response to the country of birth question was a former country name, and the country that it relates to no longer exists and is not wholly contained within the geographic boundary of a current country, the response was coded to one of the additional categories contained in the 'Former country' grouping. For example, 'Czechoslovakia' was coded to 'Czechoslovakia (not otherwise specified)'.",
+F322413,QS208NI0017,Country of birth,Europe\ EU countries\ Poland,"Country of birth is the country in which a person was born. The country of birth question included six tick-box responses: one for each of the four parts of the UK (England, Wales, Scotland and Northern Ireland); one for the Republic of Ireland; and one for 'Elsewhere'. 
+<br/>
+Where a person ticked 'Elsewhere', they were asked to write in the current name of the country in which they were born. Responses are assigned codes based on the <a href="http://www.ons.gov.uk/ons/guide-method/classifications/current-standard-classifications/national-statistics-country-classification/index.html" target="_blank">National Statistics Country Classification</a>.
+<br/>
+The grouping of countries within the classification is broadly regional, but takes into account the grouping of European Union (EU) countries. Countries in the EU are grouped into those that were EU members in March 2001, and those that became members (accession countries) between April 2001 and March 2011 as part of the EU enlargement process. 
+<br/>
+When a person's written response to the country of birth question was a former country name, and the country that it relates to no longer exists and is not wholly contained within the geographic boundary of a current country, the response was coded to one of the additional categories contained in the 'Former country' grouping. For example, 'Czechoslovakia' was coded to 'Czechoslovakia (not otherwise specified)'.",
+F322413,QS208NI0017,Unit,Persons,The unit is for a particular count (e.g. people or households),
+F322414,QS208NI0018,Unit,Persons,The unit is for a particular count (e.g. people or households),
+F322414,QS208NI0018,Country of birth,Europe\ EU Countries\ Portugal,"Country of birth is the country in which a person was born. The country of birth question included six tick-box responses: one for each of the four parts of the UK (England, Wales, Scotland and Northern Ireland); one for the Republic of Ireland; and one for 'Elsewhere'. 
+<br/>
+Where a person ticked 'Elsewhere', they were asked to write in the current name of the country in which they were born. Responses are assigned codes based on the <a href="http://www.ons.gov.uk/ons/guide-method/classifications/current-standard-classifications/national-statistics-country-classification/index.html" target="_blank">National Statistics Country Classification</a>.
+<br/>
+The grouping of countries within the classification is broadly regional, but takes into account the grouping of European Union (EU) countries. Countries in the EU are grouped into those that were EU members in March 2001, and those that became members (accession countries) between April 2001 and March 2011 as part of the EU enlargement process. 
+<br/>
+When a person's written response to the country of birth question was a former country name, and the country that it relates to no longer exists and is not wholly contained within the geographic boundary of a current country, the response was coded to one of the additional categories contained in the 'Former country' grouping. For example, 'Czechoslovakia' was coded to 'Czechoslovakia (not otherwise specified)'.",
+F322415,QS208NI0019,Country of birth,Europe\ EU Countries\ Romania,"Country of birth is the country in which a person was born. The country of birth question included six tick-box responses: one for each of the four parts of the UK (England, Wales, Scotland and Northern Ireland); one for the Republic of Ireland; and one for 'Elsewhere'. 
+<br/>
+Where a person ticked 'Elsewhere', they were asked to write in the current name of the country in which they were born. Responses are assigned codes based on the <a href="http://www.ons.gov.uk/ons/guide-method/classifications/current-standard-classifications/national-statistics-country-classification/index.html" target="_blank">National Statistics Country Classification</a>.
+<br/>
+The grouping of countries within the classification is broadly regional, but takes into account the grouping of European Union (EU) countries. Countries in the EU are grouped into those that were EU members in March 2001, and those that became members (accession countries) between April 2001 and March 2011 as part of the EU enlargement process. 
+<br/>
+When a person's written response to the country of birth question was a former country name, and the country that it relates to no longer exists and is not wholly contained within the geographic boundary of a current country, the response was coded to one of the additional categories contained in the 'Former country' grouping. For example, 'Czechoslovakia' was coded to 'Czechoslovakia (not otherwise specified)'.",
+F322415,QS208NI0019,Unit,Persons,The unit is for a particular count (e.g. people or households),
+F322416,QS208NI0020,Unit,Persons,The unit is for a particular count (e.g. people or households),
+F322416,QS208NI0020,Country of birth,Europe\ EU countries\ Slovakia,"Country of birth is the country in which a person was born. The country of birth question included six tick-box responses: one for each of the four parts of the UK (England, Wales, Scotland and Northern Ireland); one for the Republic of Ireland; and one for 'Elsewhere'. 
+<br/>
+Where a person ticked 'Elsewhere', they were asked to write in the current name of the country in which they were born. Responses are assigned codes based on the <a href="http://www.ons.gov.uk/ons/guide-method/classifications/current-standard-classifications/national-statistics-country-classification/index.html" target="_blank">National Statistics Country Classification</a>.
+<br/>
+The grouping of countries within the classification is broadly regional, but takes into account the grouping of European Union (EU) countries. Countries in the EU are grouped into those that were EU members in March 2001, and those that became members (accession countries) between April 2001 and March 2011 as part of the EU enlargement process. 
+<br/>
+When a person's written response to the country of birth question was a former country name, and the country that it relates to no longer exists and is not wholly contained within the geographic boundary of a current country, the response was coded to one of the additional categories contained in the 'Former country' grouping. For example, 'Czechoslovakia' was coded to 'Czechoslovakia (not otherwise specified)'.",
+F322417,QS208NI0021,Country of birth,Europe\ EU Countries\ Other EU countries,"Country of birth is the country in which a person was born. The country of birth question included six tick-box responses: one for each of the four parts of the UK (England, Wales, Scotland and Northern Ireland); one for the Republic of Ireland; and one for 'Elsewhere'. 
+<br/>
+Where a person ticked 'Elsewhere', they were asked to write in the current name of the country in which they were born. Responses are assigned codes based on the <a href="http://www.ons.gov.uk/ons/guide-method/classifications/current-standard-classifications/national-statistics-country-classification/index.html" target="_blank">National Statistics Country Classification</a>.
+<br/>
+The grouping of countries within the classification is broadly regional, but takes into account the grouping of European Union (EU) countries. Countries in the EU are grouped into those that were EU members in March 2001, and those that became members (accession countries) between April 2001 and March 2011 as part of the EU enlargement process. 
+<br/>
+When a person's written response to the country of birth question was a former country name, and the country that it relates to no longer exists and is not wholly contained within the geographic boundary of a current country, the response was coded to one of the additional categories contained in the 'Former country' grouping. For example, 'Czechoslovakia' was coded to 'Czechoslovakia (not otherwise specified)'.",
+F322417,QS208NI0021,Unit,Persons,The unit is for a particular count (e.g. people or households),

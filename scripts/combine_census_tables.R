@@ -1,4 +1,4 @@
-# 27/7/2016
+# New attempt to combine and tidy data from 2001 and 2011 census 
 
 rm(list = ls())
 
@@ -9,7 +9,7 @@ require(pacman)
 
 
 pacman::p_load(
-  stringr, car, tidyr, 
+  stringr, forcats, tidyr, 
   readr, readxl,
   dplyr, purrr,
   ggplot2, tmap
@@ -17,135 +17,94 @@ pacman::p_load(
 
 
 
-# Tidy 2001 data  ---------------------------------------------------------
-
-dta_01 <- read_csv("data/2001_census/cob_2001_sex.csv")
-
-value_codes <- read_excel("data/2001_census/value_code_labels.xlsx")
-eu_groupings <- read_excel("data/eu_countries_consistent_categories.xlsx",sheet = "c_2001", na = "NA")
-geo_lookup <- read_csv("data/2001_geographical_lookup/OA01_LSOA01_MSOA01_EW_LU.csv")
 
 
+# 2001 data - initial exploration -----------------------------------------
 
-value_codes %>% mutate(
-  code = value + 150000,
-  code = paste0("cs0", as.character(code))
-) -> value_codes
 
+dta_01 <- read_csv("data/2001_census/20161017123252419_CTRBIR_UNIT/Data_CTRBIR_UNIT.csv")
+
+dta_01_mta <- read_csv("data/2001_census/20161017123252419_CTRBIR_UNIT/Meta_CTRBIR_UNIT.csv")
+
+dta_01
+
+# Need to find those rows of dta_01_mta where topic == Country of birth
+
+dta_01_mta %>% 
+  filter(TOPIC == "Country of birth") %>% 
+  select(CDU_FIELD_NAME, CATEGORY) -> key_value
+
+
+# Now to slim down dta_01
 dta_01 %>% 
-  gather("code", "count", -`Zone Code`) %>% 
-  left_join(value_codes) %>% 
-  rename(OA01CD = `Zone Code`) %>% 
-  left_join(geo_lookup) %>% 
-  select(lsoa = LSOA01CD, geography, sex, count) %>% 
-  group_by(lsoa, geography, sex) %>% 
-  summarise(count = sum(count)) %>% 
-  ungroup() %>%   # .$geography %>% unique %>% write.csv(file = "clipboard", .)
-  left_join(eu_groupings) %>% 
-  filter(sex == "total") %>% 
-  filter(!is.na(geography_short)) %>% 
-  group_by(lsoa, geography_short) %>% 
-  summarise(count = sum(count)) %>% 
-  mutate(year = 2001) %>% 
-  select(lsoa, year, geography_short, count) -> simplified_2001
-
-
-write_csv(simplified_2001, "data/derived/simplified_2001.csv")
-
-rm(list = ls())
-gc()
-
-# Tidy 2011 data  ---------------------------------------------------------
-
-dta_2011 <- read_csv("data/2011_census/201672713242535_AGE_COB_ECOACT_UNIT/Data_AGE_COB_ECOACT_UNIT.csv")
-#meta_2011 <- read_csv("data/2011_census/201672713242535_AGE_COB_ECOACT_UNIT/Meta_AGE_COB_ECOACT_UNIT.csv")
-
-eu_groupings <- read_excel("data/eu_countries_consistent_categories.xlsx",sheet = "c_2011", na = "NA")
-
-ln_1 <- dta_2011 %>%  
-  .[1,]  %>% 
-  map_chr( ~.[[1]]) # convert to character vector
-
-
-nms <- names(dta_2011)
-nms2 <- ifelse(is.na(ln_1), nms, ln_1)
-names(dta_2011) <- nms2
-
-rm(nms, nms2, ln_1)
-dta_2011 %>% 
+  select(GEO_CODE, F15589:F96215) %>% 
   slice(-1) %>% 
-  gather(key = "category", value = "count", -c(1:5)) %>% 
-  filter(!is.na(count)) %>% 
-  select(lsoa = GEO_CODE, category, count) %>% 
-  separate(category, into = c("age", "country", "economic_activity", "unit"), sep = "-") %>% 
-  filter(str_detect(age, "16 and")) %>%  # For 'Age : Age 16 and over'
-  select(lsoa, country, count) %>% 
-  mutate(country = str_replace(country, pattern = "Country of birth : ", replacement = "")) %>% 
-  mutate(country = str_trim(country)) %>% 
-  left_join(eu_groupings) %>% 
-  select(lsoa, country_short, count) %>% 
-  mutate(count = as.numeric(count)) %>%  
-  group_by(lsoa, country_short) %>%
-  summarise(count = sum(count)) %>% 
-  filter(!is.na(country_short)) %>% 
-  rename(geography_short = country_short) %>% 
-  mutate(year = 2011) %>% 
-  select(lsoa, year, geography_short, count) -> simplified_2011
+  gather(code, count, -GEO_CODE) %>% 
+  mutate(count = as.numeric(count)) %>% 
+  inner_join(key_value, by = c("code" = "CDU_FIELD_NAME")) %>% 
+  select(msoa = GEO_CODE, code, category = CATEGORY, count) -> census_2001_tidy
 
-write_csv(simplified_2011, path = "data/derived/simplified_2011.csv")
-
-
-rm(list = ls())
-gc()
-
-
-
-# Join the two tables -----------------------------------------------------
-
-d_01 <- read_csv("data/derived/simplified_2001.csv")
-d_11 <- read_csv("data/derived/simplified_2011.csv")
-
-# Look at levels of non-agreement 
-d_both   %>% 
-  group_by(lsoa, year)  %>% 
-  summarise(count = sum(count))  %>% 
-  ungroup()  %>% 
-  mutate(year = paste0("y_", year))  %>% 
-  spread(year, count)  %>% 
-  mutate(y1_mis = is.na(y_2001), y2_mis = is.na(y_2011))  %>% 
-  group_by(y1_mis, y2_mis)  %>% 
-  tally()  %>%  
-  ungroup()  %>% 
-  mutate(prop = n / sum(n))
-
-# y1_mis y2_mis     n       prop
-# (lgl)  (lgl) (int)      (dbl)
-# 1  FALSE  FALSE 31672 0.89058853
-# 2  FALSE   TRUE   810 0.02277648
-# 3   TRUE  FALSE  3081 0.08663499
-
-# So about 1/10th of records don't link
-
-
-d_both <- bind_rows(d_01, d_11)
-
-d_both %>% 
-  group_by(lsoa, year) %>% 
-  mutate(proportion = count / sum(count)) %>% 
-  ungroup() -> d_both
-
-write_csv(d_both, "data/derived/simplified_both.csv")
+census_2001_tidy %>% group_by(category) %>% summarise(count = sum(count))
 
 
 
 
+# Now to attempt something similar for 2011 
 
-         
+dta_11 <- read_csv("data/2011_census/20161017151535831_COBDET_UNIT/Data_COBDET_UNIT.csv")
+
+dta_11_mta <- read_csv("data/2011_census/20161017151535831_COBDET_UNIT/Meta_COBDET_UNIT.csv")
+
+dta_11_mta %>% 
+  filter(TOPIC == "Country of birth (condensed for England and Wales) [E][W]") %>% 
+  select(CDU_FIELD_NAME, CATEGORY) -> key_value
+
+dta_11  %>% 
+  select(GEO_CODE, F1219:F1290) %>% 
+  slice(-1) %>% 
+  gather(code, count, -GEO_CODE) %>% 
+  mutate(count = as.numeric(count)) %>% 
+  inner_join(key_value, by = c("code" = "CDU_FIELD_NAME")) %>% 
+  select(msoa = GEO_CODE, code, category = CATEGORY, count) -> census_2011_tidy
+
+census_2011_tidy %>% group_by(category) %>% summarise(count = sum(count, na.rm =T))
+
+
+# Simplify 2001 data
+
+lookup_01 <- read_excel("data/eu_countries_consistent_categories.xlsx", "c_2001")
+lookup_11 <- read_excel("data/eu_countries_consistent_categories.xlsx", "c_2011")
+
+census_2001_tidy %>% 
+  inner_join(lookup_01, by = c("category" = "geography")) %>% 
+  filter(geography_short != "NA") %>% 
+  group_by(msoa, geography_short) %>% 
+  summarise(count = sum(count)) -> census_2001_tidy
+
+census_2011_tidy %>% 
+  inner_join(lookup_11, by = c("category" = "country")) %>%
+  .[,1:5] %>% 
+  select(msoa, category, count, geography_short = country_short) %>% 
+  filter(geography_short != "NA") %>% 
+  group_by(msoa, geography_short) %>% 
+  summarise(count = sum(count)) -> census_2011_tidy
+
+
+census_2001_tidy %>% 
+  rename(cob = geography_short) %>% 
+  mutate(census = 2001) %>% 
+  select(census, msoa, cob, count) -> census_2001_tidy
+
+census_2011_tidy %>% 
+  rename(cob = geography_short) %>% 
+  mutate(census = 2011) %>% 
+  ungroup() %>%
+  select(census, msoa, cob, count) -> census_2011_tidy
+
+census_both <- bind_rows(census_2001_tidy, census_2011_tidy)
+
+
+write_csv(x = census_both, "data/derived/cob_both_censuses_simplified.csv")
 
 
 
-
-
-
-
-         
