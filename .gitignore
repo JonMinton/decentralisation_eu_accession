@@ -3,3 +3,4 @@
 .RData
 .Ruserdata
 shapefiles/*
+data/big_lookups/*
