@@ -9,16 +9,18 @@ require(pacman)
 
 
 pacman::p_load(
-  stringr, car, tidyr, 
-  readr, readxl,
-  dplyr, purrr,
+  stringr, tidyr, 
   shapefiles, sp,
   spdep, rgeos, maptools,
   tmap, classInt,
   ggplot2, 
   RColorBrewer,
   CARBayes, MCMCpack,
-  truncdist
+  truncdist,
+  readr, readxl,
+  dplyr, purrr,
+  forcats
+  
 )
 
 #### Source the functions for running the model
@@ -27,45 +29,519 @@ source("scripts/binomial.MCARleroux.R")
 Rcpp::sourceCpp("scripts/aqmen.cpp")
 
 
-dta <- read_csv("data/derived/simplified_both.csv")
 
-# 
-# shp_eng <- read_shape(file = "shapefiles/England_low_soa_2001/england_low_soa_2001.shp")
-# 
-# dta  %>% filter(year == 2001, geography_short == "UK")  -> tmp
-# 
-# tmp %>% append_data(data = ., shp = shp_eng, key.shp = "zonecode", key.data = "lsoa") -> 
-#   shp_eng_2001
-# 
-# shp_eng_2001 %>% 
-#   tm_shape(.) + tm_fill(col = "proportion")
-# 
+dta <- read_csv("data/derived/cob_both_censuses_simplified.csv")
 
-
-# LSOAs seem too highly detailed. Looking to move to MSOAs instead
-
-# I already have LSOAs to MSOA lookup for 2001
-
-lookup <- read_csv("data/2001_geographical_lookup/OA01_LSOA01_MSOA01_EW_LU.csv")
-
-# Remove the numbers from the end of MSOA01NM and we have place names. We can use those 
-# 
-# lookup %>% 
-#   mutate(
-#     place_name = str_replace(MSOA01NM, "[0-9]{1,3}$", ""),
-#     place_name = str_trim(place_name)
-#          ) %>% 
-#  group_by(place_name) %>% tally %>% arrange(desc(n)) %>% View
-
-
-# TTWA lookup 
-
+# Link msoa to ttwa 
 ttwa_lookup <- read_csv("data/LSOA01_TTWA01_UK_LU.csv")
-
+lookup <- read_csv("data/2001_geographical_lookup/OA01_LSOA01_MSOA01_EW_LU.csv")
 ttwa_lookup %>% 
   dplyr::select(LSOA01CD, TTWA01CD, TTWA01NM) %>% 
   inner_join(lookup) %>% 
   dplyr::select(lsoa = LSOA01CD, msoa = MSOA01CD, ttwa = TTWA01CD, ttwa_name = TTWA01NM) -> ttwa_msoa_lookup
+
+
+#Names of TTWAs to use 
+
+ttwas_to_use <- c(
+  "Sheffield and Rotherham",
+  "Liverpool", 
+  "Manchester",
+  "Birmingham", 
+  "London", 
+  "Derby",  
+  "Bristol",  
+  "York"  
+)
+
+# TTWA centroid MSOA finder 
+
+ttwa_msoa_centroids <- read_csv("data/derived/msoa01_for_centroids.csv") %>% 
+  mutate(ttwa = c("London", "Manchester", "Liverpool", "Sheffield and Rotherham", "Birmingham", "York", "Derby", "Bristol")) %>% 
+  dplyr::select(ttwa, msoa = msoa01)
+
+
+# Tasks: 
+
+# For each TTWA
+# produce reduced map with only relevant TTWA MSOAs 
+
+
+# Shapefile for MSOA 
+
+shp_msoa <- read_shape(file = "shapefiles/Middle_layer_super_output_areas_(E+W)_2001_Boundaries_(Full_Extent)_V2/MSOA_2001_EW_BFE_V2.shp")
+
+
+# Simple version of task: do just for Sheffield 
+
+ttwa_msoa_lookup
+
+get_shapefile_for_ttwa <- function(ttwa_nm, shp, dta_ttwa){
+  dta_ttwa  %>% 
+    filter(ttwa_name == ttwa_nm)  %>% 
+    dplyr::select(msoa)  %>% 
+    unique()   %>% 
+    .$msoa -> msoas_of_interest
+  shp2 <- shp[shp$MSOA01CD %in% msoas_of_interest,]
+  shp2
+}
+
+get_data_for_ttwa <- function(ttwa, dta, dta_ttwa){
+  dta_ttwa[dta_ttwa$ttwa_name == ttwa,] %>% 
+    dplyr::select(msoa) %>% 
+    unique() %>% 
+    .$msoa -> msoas_of_interest
+  dta %>% 
+    filter(msoa %in% msoas_of_interest) -> out
+  out  
+}
+
+calc_distance_to_centre <- function(shp, msoa_centre){
+  
+  gCentroid(shp, byid = T) %>% 
+    as(., "data.frame") -> tmp
+  
+  data_frame(msoa = as.character(shp@data$MSOA01CD), x = tmp$x, y = tmp$y) %>% 
+    mutate(centre = msoa == msoa_centre) %>% 
+    mutate(distance_to_centre = ((x - x[centre])^2 + (y - y[centre])^2)^0.5) -> output
+  output
+}
+
+calc_distance_prop_relationship <- function(dta, dist_cent){
+  dta  %>% 
+    group_by(census, msoa)   %>% 
+    mutate(prop = count / sum(count)) -> dta_prop
+  dist_cent %>% dplyr::select(msoa, distance_to_centre) %>% 
+    right_join(dta_prop) -> out
+  out
+}
+
+# distance and proportion data for all ttwas 
+
+dta_shp_ttwa <- data_frame(
+  ttwa = ttwas_to_use,
+  msoa_centroid = c(
+    "E02001641","E02001379","E02001060","E02001885","E02000979","E02002808","E02003043","E02002784"
+  ),
+  data = map(ttwa, get_data_for_ttwa, dta =dta , dta_ttwa = ttwa_msoa_lookup),
+  shp_for_ttwa = map(.x = ttwa, .f = get_shapefile_for_ttwa, shp = shp_msoa, dta_ttwa = ttwa_msoa_lookup),
+  distance_to_centroid = map2(shp_for_ttwa, msoa_centroid, calc_distance_to_centre),
+  dta_prop_dist = map2(data, distance_to_centroid, calc_distance_prop_relationship)
+)
+
+
+# Flatten above to dataframe
+ttwa_dist_props <- dta_shp_ttwa %>% 
+  dplyr::select(ttwa, dta_prop_dist) %>% 
+  unnest()
+
+ttwa_dist_props %>% 
+  group_by(ttwa) %>% 
+  mutate(ttwa_size = sum(count)) %>% 
+  ungroup() %>% 
+  mutate(ttwa = ifelse(ttwa == "Sheffield and Rotherham", "Sheffield", ttwa)) %>% 
+  mutate(ttwa = fct_reorder(ttwa, ttwa_size)) %>% 
+  mutate(cob = fct_relevel(cob, "UK", "rWE", "EE", "Other")) %>% 
+  mutate(census = factor(census)) %>% 
+  mutate(distance_to_centre = distance_to_centre / 1000) %>% 
+  ggplot(., aes(x = distance_to_centre, y = prop, group = census, colour = census)) +
+  geom_point(shape = ".", alpha = 0.2) + stat_smooth(se = F) + 
+  facet_grid(cob ~ ttwa, scales = "free") +
+  labs(x = "Distance to centre (km)", y = "Proportion of population in this category")
+
+ggsave("figures/proportion_distance_plots.png", height = 20, width = 30, units = "cm", dpi = 300)
+
+# Decile plots 
+
+ttwa_dist_props %>% 
+  group_by(ttwa) %>% 
+  mutate(ttwa_size = sum(count)) %>% 
+  ungroup() %>% 
+  mutate(ttwa = ifelse(ttwa == "Sheffield and Rotherham", "Sheffield", ttwa)) %>% 
+  mutate(ttwa = fct_reorder(ttwa, ttwa_size)) %>% 
+  mutate(cob = fct_relevel(cob, "UK", "rWE", "EE", "Other")) %>% 
+  mutate(census = factor(census)) %>% 
+  group_by(ttwa) %>% 
+  mutate(dist_decile = factor(ntile(distance_to_centre, 10))) %>% 
+  group_by(ttwa, dist_decile, cob, census) %>% 
+  summarise(mean_prop = mean(prop), sd_prop = sd(prop), n = sum(count), se_prop = sd_prop / (n ^ 0.5)) %>% 
+  ggplot(., aes(x = dist_decile, y = mean_prop, group = census, colour = census)) + 
+  geom_line() + geom_point() + 
+  geom_linerange(aes(ymax = mean_prop + 2 * se_prop, ymin = mean_prop - 2 * se_prop)) +
+  facet_grid(cob ~ ttwa, scales = "free") +
+  labs(x = "Decile from centre (1 = nearest)", y = "Proportion of group in decile")
+ggsave("figures/proportion_decile_distance_plots.png", height = 20, width = 30, units = "cm", dpi = 300)
+
+
+
+
+
+# Code for doing RCI calculation  - stuck due to areas with no neighbours 
+
+
+
+################################
+#### Fit the model
+################################
+#### MCMC quantities
+burnin <- 10000
+n.sample <- 20000
+thin <- 10
+n.keep <- (n.sample - burnin)/thin
+
+# For each ttwa, 
+# for each year 
+# for each group 
+
+# Start off with Sheffield & Rotherham, Eastern European, 2011 
+
+dta_shp_ttwa %>% 
+  filter(ttwa == "Sheffield and Rotherham") %>% 
+  .$shp_for_ttwa %>% .[[1]] -> this_ttwa
+
+dta_shp_ttwa %>% 
+  filter(ttwa == "Sheffield and Rotherham") %>% 
+  .$data %>% .[[1]] -> this_data
+
+this_data %>% 
+  filter(census == 2001) %>% 
+  group_by(msoa) %>% 
+  mutate(total = sum(count)) %>% 
+  ungroup() %>% 
+  filter(cob == "EE") -> this_data_ss
+
+this_ttwa %>% 
+  append_data(
+    shp = ., data = this_data_ss,
+    key.shp = "MSOA01CD", key.data = "msoa",
+    ignore.na = T
+  ) %>% 
+  .[!is.na(.$count),] -> this_dta_shp
+
+W_nb <- poly2nb(this_dta_shp)
+W_list <- nb2listw(W_nb, style = "B") 
+W <- nb2mat(W_nb, style = "B")
+n <- nrow(W)
+
+Y <- as.integer(this_dta_shp@data$count)
+
+N <- as.integer(this_dta_shp@data$total)
+
+model_01 <- S.CARleroux(Y ~ 1, trials = N, W = W, family = "binomial", burnin = burnin, n.sample = n.sample, thin = thin )  
+
+# This doesn't work as some areas have no neighbours
+
+
+dta_shp_ttwa %>% 
+  filter(ttwa == "Derby") %>% 
+  .$shp_for_ttwa %>% .[[1]] -> this_ttwa
+
+dta_shp_ttwa %>% 
+  filter(ttwa == "Derby") %>% 
+  .$data %>% .[[1]] -> this_data
+
+this_data %>% 
+  filter(census == 2001) %>% 
+  group_by(msoa) %>% 
+  mutate(total = sum(count)) %>% 
+  ungroup() %>% 
+  filter(cob == "EE") -> this_data_ss
+
+this_ttwa %>% 
+  append_data(
+    shp = ., data = this_data_ss,
+    key.shp = "MSOA01CD", key.data = "msoa",
+    ignore.na = T
+  ) %>% 
+  .[!is.na(.$count),] -> this_dta_shp
+
+W_nb <- poly2nb(this_dta_shp)
+W_list <- nb2listw(W_nb, style = "B") 
+W <- nb2mat(W_nb, style = "B")
+n <- nrow(W)
+
+Y <- as.integer(this_dta_shp@data$count)
+
+N <- as.integer(this_dta_shp@data$total)
+
+model_01 <- S.CARleroux(Y ~ 1, trials = N, W = W, family = "binomial", burnin = burnin, n.sample = n.sample, thin = thin )  
+
+
+
+# Now to revise do_model to run all available years 
+
+do_model <- function(place, initial_dist = 18000){
+  
+  this_dist <- initial_dist
+  has_islands <- T
+  
+  while(has_islands){
+    dz_2011  %>% 
+      append_data(
+        shp = . , data = centre_distance, 
+        key.shp = "DataZone", key.data = "datazone"
+      ) %>% 
+      .[.$nearest_centre == place,] %>% 
+      .[.$distance_to_centre <= this_dist,] -> dz_city
+    # plot(dz_city, main = this_dist)
+    # browser()
+    
+    w <-  poly2nb(dz_city)   
+    if (any(card(w) == 0)){
+      this_dist <- this_dist + 1000
+    } else {
+      has_islands <- F
+    }
+  }
+  
+  simd_2011_reweighted %>% 
+    dplyr::select(dz_2011, year, pop_total, pop_incomedeprived) -> tmp
+  
+  tmp %>% 
+    dplyr::select(-pop_incomedeprived) %>% 
+    mutate(year = paste0("pop_total_", year)) %>% 
+    spread(year, pop_total) -> pops
+  
+  tmp %>% 
+    dplyr::select(-pop_total) %>% 
+    mutate(year = paste0("pop_id_", year)) %>% 
+    spread(year, pop_incomedeprived) -> incdeps
+  
+  popinc <- pops %>% inner_join(incdeps)
+  rm(tmp, pops, incdeps)
+  
+  
+  dz_city %>% 
+    append_data(
+      shp = ., data = popinc,
+      key.shp = "DataZone", key.data = "dz_2011",
+      ignore.na = T
+    ) %>% 
+    .[!is.na(.$pop_total_2004),] -> dz_city
+  
+  
+  W_nb <- poly2nb(dz_city)
+  # distance to allow the 'islands' to be included 
+  W_list <- nb2listw(W_nb, style = "B")
+  W <- nb2mat(W_nb, style = "B")
+  n <- nrow(W)
+  
+  # Need to remove unconnected datazones ('islands')
+  
+  
+  
+  #### Format the data
+  Y.mat <- cbind(
+    as.integer(dz_city@data$pop_id_2004),
+    as.integer(dz_city@data$pop_id_2006), 
+    as.integer(dz_city@data$pop_id_2009), 
+    as.integer(dz_city@data$pop_id_2012),
+    as.integer(dz_city@data$pop_id_2016) 
+  )
+  
+  N.mat <- cbind(
+    as.integer(dz_city@data$pop_total_2004),
+    as.integer(dz_city@data$pop_total_2006), 
+    as.integer(dz_city@data$pop_total_2009), 
+    as.integer(dz_city@data$pop_total_2012),
+    as.integer(dz_city@data$pop_total_2016) 
+  )
+  
+  denom_too_small <- N.mat[,5] < 1
+  N.mat[denom_too_small, 5] <- 1
+  
+  Y.mat[denom_too_small, 5] <- 0
+  
+  
+  
+  #### Run the model
+  Y <- Y.mat[,1] ; N <- N.mat[,1]
+  model_01 <- S.CARleroux(Y ~ 1, trials = N, W = W, family = "binomial", burnin = burnin, n.sample = n.sample, thin = thin )  
+  
+  Y <- Y.mat[,2] ; N <- N.mat[,2]
+  model_02 <- S.CARleroux(Y ~ 1, trials = N, W = W, family = "binomial", burnin = burnin, n.sample = n.sample, thin = thin )  
+  
+  Y <- Y.mat[,3] ; N <- N.mat[,3]
+  model_03 <- S.CARleroux(Y ~ 1, trials = N, W = W, family = "binomial", burnin = burnin, n.sample = n.sample, thin = thin )  
+  
+  Y <- Y.mat[,4] ; N <- N.mat[,4]
+  model_04 <- S.CARleroux(Y ~ 1, trials = N, W = W, family = "binomial", burnin = burnin, n.sample = n.sample, thin = thin )  
+  
+  #placeholder for new data 
+  Y <- Y.mat[,5] ; N <- N.mat[,5]
+  model_05 <- S.CARleroux(Y ~ 1, trials = N, W = W, family = "binomial", burnin = burnin, n.sample = n.sample, thin = thin )  
+  
+  #  model$summary.results
+  
+  #### Compute the coordinates and ordering from the city centre
+  dist.order <- order(dz_city@data$distance_to_centre)
+  
+  #### Compute the global RCI and D
+  indicators.post <- array(NA, c(n.keep,10))
+  colnames(indicators.post) <- c(
+    "RCI_2004", "RCI_2006","RCI_2009","RCI_2012", "RCI_2016", 
+    "D_2004", "D_2006", "D_2009", "D_2012", "D_2016"
+  )
+  
+  all_2004 <- as.integer(N.mat[,1])
+  all_2006 <- as.integer(N.mat[,2])
+  all_2009 <- as.integer(N.mat[,3])
+  all_2012 <- as.integer(N.mat[,4])
+  all_2016 <- as.integer(N.mat[,5]) # placeholder for new data 
+  
+  
+  for(i in 1:n.keep)
+  {
+    ## Compute the probability and fitted values for the ith posterior sample
+    logit_01 <- model_01$samples$beta[i, ] + model_01$samples$phi[i, ]
+    prob_01 <- exp(logit_01) / (1 + exp(logit_01))
+    prob.mat_01 <- matrix(prob_01, nrow=n, byrow=TRUE)
+    fitted.mat_01 <- N.mat[,1] * prob.mat_01
+    # Explore from here 
+    
+    logit_02 <- model_02$samples$beta[i, ] + model_02$samples$phi[i, ]
+    prob_02 <- exp(logit_02) / (1 + exp(logit_02))
+    prob.mat_02 <- matrix(prob_02, nrow=n, byrow=TRUE)
+    fitted.mat_02 <- N.mat[,2] * prob.mat_02
+    
+    
+    logit_03 <- model_03$samples$beta[i, ] + model_03$samples$phi[i, ]
+    prob_03 <- exp(logit_03) / (1 + exp(logit_03))
+    prob.mat_03 <- matrix(prob_03, nrow=n, byrow=TRUE)
+    fitted.mat_03 <- N.mat[,3] * prob.mat_03
+    
+    logit_04 <- model_04$samples$beta[i, ] + model_04$samples$phi[i, ]
+    prob_04 <- exp(logit_04) / (1 + exp(logit_04))
+    prob.mat_04 <- matrix(prob_04, nrow=n, byrow=TRUE)
+    fitted.mat_04 <- N.mat[,4] * prob.mat_04
+    
+    #Placeholder for new data 
+    logit_05 <- model_05$samples$beta[i, ] + model_05$samples$phi[i, ]
+    prob_05 <- exp(logit_05) / (1 + exp(logit_05))
+    prob.mat_05 <- matrix(prob_05, nrow=n, byrow=TRUE)
+    fitted.mat_05 <- N.mat[,5] * prob.mat_05
+    
+    ## Compute the RCI for both years
+    indicators.post[i, 1] <- RCI(fitted.mat_01, as.integer(N.mat[,1]), dist.order)
+    indicators.post[i, 2] <- RCI(fitted.mat_02, as.integer(N.mat[,2]), dist.order)
+    indicators.post[i, 3] <- RCI(fitted.mat_03, as.integer(N.mat[,3]), dist.order)
+    indicators.post[i, 4] <- RCI(fitted.mat_04, as.integer(N.mat[,4]), dist.order)
+    indicators.post[i, 5] <- RCI(fitted.mat_05, as.integer(N.mat[,5]), dist.order) # placeholder
+    
+    ## Compute D for both years
+    p_2004 <- prob.mat_01
+    p_2004_av <- sum(p_2004 * all_2004) / sum(all_2004)
+    indicators.post[i, 6] <- sum(all_2004 * abs(p_2004 - p_2004_av)) / (2 * sum(all_2004) * p_2004_av * (1-p_2004_av))   
+    
+    p_2006 <- prob.mat_02
+    p_2006_av <- sum(p_2006 * all_2006) / sum(all_2006)
+    indicators.post[i, 7] <- sum(all_2006 * abs(p_2006 - p_2006_av)) / (2 * sum(all_2006) * p_2006_av * (1-p_2006_av))   
+    
+    p_2009 <- prob.mat_03
+    p_2009_av <- sum(p_2009 * all_2009) / sum(all_2009)
+    indicators.post[i, 8] <- sum(all_2009 * abs(p_2009 - p_2009_av)) / (2 * sum(all_2009) * p_2009_av * (1-p_2009_av))   
+    
+    p_2012 <- prob.mat_04
+    p_2012_av <- sum(p_2012 * all_2012) / sum(all_2012)
+    indicators.post[i, 9] <- sum(all_2012 * abs(p_2012 - p_2012_av)) / (2 * sum(all_2012) * p_2012_av * (1-p_2012_av))   
+    
+    p_2016 <- prob.mat_04
+    p_2016_av <- sum(p_2016 * all_2016) / sum(all_2016)
+    indicators.post[i, 10] <- sum(all_2016 * abs(p_2016 - p_2016_av)) / (2 * sum(all_2016) * p_2016_av * (1-p_2016_av))   
+    
+  }
+  
+  indicators.post  
+}
+
+
+
+
+indicators_aberdeen <- do_model("Aberdeen")
+indicators_dundee <- do_model("Dundee")
+indicators_edinburgh <- do_model("Edinburgh")
+indicators_glasgow <- do_model("Glasgow")
+
+# Tidy all indicator draws 
+
+tidy_indicators <- function(mtrx, place){
+  mtrx %>% 
+    data.frame() %>% 
+    tbl_df %>% 
+    mutate(draw = 1:dim(mtrx)[1]) %>% 
+    gather(mp, value, -draw) %>% 
+    mutate(place = place) %>% 
+    separate(mp, into = c("measure", "period")) %>% 
+    dplyr::select(place, measure, period, draw, value)
+}
+
+tind_aberdeen <- tidy_indicators(indicators_aberdeen, "Aberdeen")
+tind_dundee <- tidy_indicators(indicators_dundee, "Dundee")
+tind_edinburgh <- tidy_indicators(indicators_edinburgh, "Edinburgh")
+tind_glasgow <- tidy_indicators(indicators_glasgow, "Glasgow")
+
+tidy_indicators_all <- reduce(
+  list(tind_aberdeen, tind_dundee, tind_edinburgh, tind_glasgow),
+  bind_rows
+)
+
+
+write_csv(tidy_indicators_all, path = "data/all_posterior_draws.csv")
+
+
+
+
+
+# Older material ----------------------------------------------------------
+
+
+
+
+# 2011 centroids
+ttwa_centroids <- c(
+  Aberdeen = "S01006646",
+  Glasgow = "S01010265",
+  Edinburgh = "S01008677",
+  Dundee = "S01007705",
+  Inverness = "S01010620",
+  Perth = "S01011939",
+  `Falkirk and Stirling` = "S01013067"
+)
+
+# using rgeos::gCentroid
+
+calc_distance_to_centres <- function(shp, code_centre){
+  gCentroid(shp, byid = T) %>% 
+    as(., "data.frame") -> tmp
+  
+  data_frame(dz = as.character(shp@data$DataZone), x = tmp$x, y = tmp$y) %>% 
+    mutate(centre = dz == code_centre) %>% 
+    mutate(distance_to_centre = ((x - x[centre])^2 + (y - y[centre])^2)^0.5) -> output
+  output
+}
+
+
+fn <- function(val, nm){
+  dz_2011 %>% 
+    calc_distance_to_centres(., val) %>% 
+    .[c(1, 5)] -> out 
+  names(out) <- c("datazone", nm)
+  out
+}
+
+# Find nearest centre and distance to nearest centre
+map2(ttwa_centroids, names(ttwa_centroids), fn) %>% 
+  reduce(., inner_join) %>% 
+  gather(place, distance, -datazone) %>%
+  arrange(datazone) %>% 
+  group_by(datazone) %>% 
+  mutate(min_distance = min(distance)) %>%
+  filter(distance == min_distance) %>% 
+  ungroup() %>% 
+  transmute(datazone, nearest_centre = place, distance_to_centre = distance) -> centre_distance
+# TTWA lookup 
+
+
 
 dta %>% 
   left_join(ttwa_msoa_lookup) %>% 
@@ -84,9 +560,7 @@ dta %>%
   mutate(proportion = count / sum(count)) -> dta_lsoa_ttwa
 
 
-# shapefile, MSOA
 
-shp_msoa <- read_shape(file = "shapefiles/Middle_layer_super_output_areas_(E+W)_2001_Boundaries_(Full_Extent)_V2/MSOA_2001_EW_BFE_V2.shp")
 
 
 # Shapefile, LSOA 
@@ -124,20 +598,26 @@ create_ttwa_shp <- function(dta, shp) {
 }
 
 create_ttwa_tmap <- function(shp, title){
-   tm_shape(shp) + 
+  tm_shape(shp) + 
     tm_fill("proportion", palette = "Paired", style = "quantile", n = 10) + 
     tm_legend(legend.outside = T, legend.outside.position = "right") -> tm
   
   save_tmap(tm, filename = paste0("tmaps/proportions/",title, ".png"), width = 20, height = 20, units = "cm", dpi = 300)
   NULL
 }
-
-dta_msoa_ttwa %>% 
-  filter(!is.na(year), !is.na(ttwa_name)) %>% 
-  group_by(ttwa_name, year, geography_short) %>% 
+debug(create_ttwa_tmap)
+ttwa_msoa_lookup %>% select(msoa, ttwa_name) %>% filter(!duplicated(.)) -> tm_short
+dta %>% 
+  left_join(tm_short) %>% 
+  filter(!is.na(census), !is.na(ttwa_name)) %>% 
+  group_by(msoa, census) %>% 
+  mutate(proportion = count / sum(count)) %>%
+  group_by(ttwa_name, census, cob) %>% 
   nest() %>% 
+  slice(1:10) %>% 
   mutate(ttwa_shp = map(data, create_ttwa_shp, shp = shp_msoa)) %>% 
-  mutate(title_name = paste0(ttwa_name, "_" , year, "_" , geography_short)) %>%  
+  mutate(title_name = paste0(ttwa_name, "_" , census, "_" , cob)) -> tmp 
+tmp %>%   
   mutate(tmp = walk2(ttwa_shp, title_name, create_ttwa_tmap))
 
 
@@ -150,7 +630,7 @@ create_change_ttwa_tmap <- function(shp, title){
   NULL
 }
 
-debug(create_change_ttwa_tmap)
+
 dta_msoa_ttwa %>% 
   filter(!is.na(year), !is.na(ttwa_name)) %>% 
   dplyr::select(ttwa, ttwa_name, msoa, year, geography_short, proportion) %>% 
@@ -167,7 +647,7 @@ dta_msoa_ttwa %>%
 tmp %>% 
   mutate(tmp = walk2(ttwa_shp, title_name, create_change_ttwa_tmap))
 
- 
+
 
 
 
@@ -482,7 +962,7 @@ cob2011 %>%
     lsoa_11_cd, lsoa_11_nm = Name,
     ttwa_07_cd, ttwa_07_nm,
     total_11, eu15_11, eu12_11, uk_11
-    ) -> cob_11_tdy
+  ) -> cob_11_tdy
 
 
 
@@ -525,7 +1005,7 @@ unchanged_data <-  boundary_changes_1 %>%
     ttwa_07_cd = ttwa_07_cd.x, ttwa_07_nm = ttwa_07_nm.x,
     total_01, eu15_01, eu12_01, uk_01,
     total_11, eu15_11, eu12_11, uk_11
-    )
+  )
 
 boundary_changes_1 %>% 
   filter(CHGIND == "S") %>% 
@@ -555,11 +1035,11 @@ boundary_changes_1 %>%
     ttwa_07_cd,  ttwa_07_nm,
     total_01, eu15_01, eu12_01, uk_01,
     total_11, eu15_11, eu12_11, uk_11
-    ) -> all_merged_data
+  ) -> all_merged_data
 
 unchanged_data %>%
-bind_rows(all_merged_data) %>%
-bind_rows(all_split_data) -> all_recombined_data
+  bind_rows(all_merged_data) %>%
+  bind_rows(all_split_data) -> all_recombined_data
 
 all_recombined_data %>% 
   unique()
@@ -632,30 +1112,30 @@ eng_by_ttwa[["Sheffield & Rotherham"]] <- eng_by_ttwa[["Sheffield & Rotherham"]]
 eng_by_ttwa[["Sheffield & Rotherham"]]@data <- data.frame(
   eng_by_ttwa[["Sheffield & Rotherham"]]@data,
   eng_by_ttwa[["Sheffield & Rotherham"]][match.ind[!is.na(match.ind)],]
-  )
+)
 # head(sheffield.map@data)
 
 #### Now dissolve the Sheffield ttwa polygons based on the ids of LSOAs in 2011
 # library(rgeos)
 # if (rgeosStatus()) {
-  tmp_map <- unionSpatialPolygons(
-    eng_by_ttwa[["Sheffield & Rotherham"]], 
-    IDs = as.character(eng_by_ttwa[["Sheffield & Rotherham"]]$lsoa_11_cd)
-  )
+tmp_map <- unionSpatialPolygons(
+  eng_by_ttwa[["Sheffield & Rotherham"]], 
+  IDs = as.character(eng_by_ttwa[["Sheffield & Rotherham"]]$lsoa_11_cd)
+)
 #  temp.map <- unionSpatialPolygons(sheffield.map, IDs = as.character(sheffield.map$LSOA11CD)) 
 # }
 # if(rgeosStatus()) {
-  tmp_df <- as(
-    eng_by_ttwa[["Sheffield & Rotherham"]]@data
-    , "data.frame"
-  )[!duplicated(eng_by_ttwa[["Sheffield & Rotherham"]]$lsoa_11_cd),]
+tmp_df <- as(
+  eng_by_ttwa[["Sheffield & Rotherham"]]@data
+  , "data.frame"
+)[!duplicated(eng_by_ttwa[["Sheffield & Rotherham"]]$lsoa_11_cd),]
 #  temp.df <- as(sheffield.map@data,"data.frame")[!duplicated(sheffield.map$LSOA11CD),]
 #  row.names(temp.df) <- temp.df$LSOA11CD
-  row.names(tmp_df) <- tmp_df$lsoa_11_cd
+row.names(tmp_df) <- tmp_df$lsoa_11_cd
 #    sheffield.map.final <- SpatialPolygonsDataFrame(temp.map,temp.df)
-  eng_by_ttwa[["Sheffield & Rotherham"]] <- SpatialPolygonsDataFrame(
-    tmp_map, tmp_df   
-  )
+eng_by_ttwa[["Sheffield & Rotherham"]] <- SpatialPolygonsDataFrame(
+  tmp_map, tmp_df   
+)
 # }
 
 
@@ -682,7 +1162,7 @@ eng_by_ttwa[["Sheffield & Rotherham"]]$prop_eu12_t2 <- prop_eu12_t2 <- eu12_t2 /
 f5 <- classIntervals(c(
   prop_eu15_t1, prop_eu15_t2, 
   prop_eu12_t2
-  ),n=5,style="fisher")
+),n=5,style="fisher")
 f5_brks <- round(f5$brks,digits=3)
 f5_brks[1] <- f5_brks[1] - 0.001
 f5_brks[6] <- f5_brks[6] + 0.001

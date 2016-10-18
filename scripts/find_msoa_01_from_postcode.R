@@ -1,6 +1,11 @@
 # Link postcode to MSOA 01 
 # ONly do this once as involves some very large files
 
+# For the postcode to 2001 MSOA lookup, I'm looking to the following link:
+#http://geoportal.statistics.gov.uk/datasets/90614a78d96d450fa157995d08496a2e_0
+# But this is VERY LARGE  so have created new gitignore instruction.
+
+
 rm(list = ls())
 
 pacman::p_load(
